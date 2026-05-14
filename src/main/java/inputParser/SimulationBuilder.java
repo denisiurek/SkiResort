@@ -1,6 +1,9 @@
 package inputParser;
 
+import simulation.SimulationEngine;
+
 public class SimulationBuilder {
+
     public void addNode(int height, int x, int y, boolean communicated) {
         System.out.println("node: " + height + " " + x + " " + y + " " + communicated);
     }
@@ -10,9 +13,14 @@ public class SimulationBuilder {
     }
 
     public void addRoute(int startNode, int endNode, int routeDifficulty, int routeDuration, double baseRouteAttractiveness, double routeResilience) {
-        System.out.println(startNode + " " + endNode + " " + routeDifficulty + " " + routeDuration + " " + baseRouteAttractiveness + " " + routeResilience);
+        System.out.println("route: " + startNode + " " + endNode + " " + routeDifficulty + " " + routeDuration + " " + baseRouteAttractiveness + " " + routeResilience);
     }
 
     public void addAthlete(int skillLevel, double spontaneousness, boolean tracked, double levelMatch, double surfaceTolerance, int startNode, int startTime) {
+        System.out.println("athlete: " + skillLevel + " " + spontaneousness + " " + tracked + " " + levelMatch + " " + surfaceTolerance + " " + startNode + " " + startTime);
+    }
+
+    public SimulationEngine build() {
+        return null;
     }
 }
