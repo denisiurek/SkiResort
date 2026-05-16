@@ -1,19 +1,19 @@
 package inputParser;
 
 public class IncorrectFormattingException extends RuntimeException {
-    private int inputLineNuber;
+    private int inputLineNumber;
 
     public IncorrectFormattingException(String message, int inputLineNumber) {
         super(message);
-        this.inputLineNuber = inputLineNumber;
+        this.inputLineNumber = inputLineNumber;
     }
 
     public void appendInputLineNumber(int count) {
-        inputLineNuber += count;
+        inputLineNumber += count;
     }
 
     @Override
     public String getMessage() {
-        return super.getMessage() + " in line: " + inputLineNuber;
+        return super.getMessage() + " in line: " + inputLineNumber;
     }
 }

@@ -1,11 +1,13 @@
-package simulation.events.eventQueue;
+package collections.eventQueue;
 
 import simulation.events.Event;
-import simulation.events.EventQueueEmptyException;
 
 
 public interface EventQueue {
     void add(Event event);
+
     Event fetch() throws EventQueueEmptyException;
+
+    Event peek() throws EventQueueEmptyException;
     boolean isEmpty();
 }

@@ -23,7 +23,8 @@ public class NodeSectionParser implements SectionParser {
 
                 builder.addNode(height, x, y, communicated);
             } catch (NoSuchElementException e) {
-                throw new IncorrectFormattingException("Incorrect formatting in lift section", i);
+                throw new IncorrectFormattingException("Incorrect formatting " +
+                        "in node section", i);
             }
         }
     }

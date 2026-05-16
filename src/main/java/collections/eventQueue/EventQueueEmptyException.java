@@ -1,4 +1,4 @@
-package simulation.events;
+package collections.eventQueue;
 
 public class EventQueueEmptyException extends RuntimeException {
     public EventQueueEmptyException(String message) {

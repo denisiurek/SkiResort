@@ -4,6 +4,8 @@ import inputParser.sections.AthleteGroupSectionParser;
 import inputParser.sections.LiftSectionParser;
 import inputParser.sections.NodeSectionParser;
 import inputParser.sections.RouteSectionParser;
+import simulation.Logger;
+import simulation.SimulationConfig;
 import simulation.SimulationEngine;
 
 import java.io.InputStream;
@@ -11,8 +13,7 @@ import java.util.Scanner;
 
 public class ResortInputParser implements InputParser {
     private final Scanner scanner;
-
-    ResortInputParser(InputStream inputStream) {
+    public ResortInputParser(InputStream inputStream) {
         this.scanner = new Scanner(inputStream);
     }
 
@@ -21,8 +22,8 @@ public class ResortInputParser implements InputParser {
     }
 
     @Override
-    public SimulationEngine parse() {
-        SimulationBuilder builder = new SimulationBuilder();
+    public SimulationEngine parse(Logger logger, SimulationConfig config) {
+        SimulationBuilder builder = new SimulationBuilder(config, logger);
         int currentLine = 1;
         try {
             String nodeHeader = scanner.nextLine();

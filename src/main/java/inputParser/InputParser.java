@@ -1,7 +1,9 @@
 package inputParser;
 
+import simulation.Logger;
+import simulation.SimulationConfig;
 import simulation.SimulationEngine;
 
 public interface InputParser {
-    SimulationEngine parse();
+    SimulationEngine parse(Logger logger, SimulationConfig config);
 }

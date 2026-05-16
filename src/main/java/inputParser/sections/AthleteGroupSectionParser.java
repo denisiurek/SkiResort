@@ -6,6 +6,8 @@ import inputParser.SimulationBuilder;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import static timeUtils.TimeOperators.expandAbsoluteTime;
+
 public class AthleteGroupSectionParser implements SectionParser {
     @Override
     public void parseSection(String[] entries, SimulationBuilder builder) throws IncorrectFormattingException {
@@ -18,7 +20,7 @@ public class AthleteGroupSectionParser implements SectionParser {
 
                 int startTime = parameters.startTime;
                 for (int j = 0; j < characteristics.groupSize; j++) {
-                    builder.addAthlete(characteristics.skillLevel, characteristics.spontaneousness, characteristics.tracked, weights.levelMatch, weights.surfaceTolerance, parameters.startNode, startTime);
+                    addAthlete(builder, characteristics, weights, parameters, startTime);
                     startTime += parameters.timeSpread;
                 }
             } catch (NoSuchElementException e) {
@@ -26,6 +28,24 @@ public class AthleteGroupSectionParser implements SectionParser {
             }
 
         }
+    }
+
+    private void addAthlete(
+            SimulationBuilder builder,
+            AthleteGroupLine1 characteristics,
+            AthleteGroupLine2 weights,
+            AthleteGroupLine3 parameters,
+            int startTime
+    ) {
+        builder.addAthlete(
+                characteristics.skillLevel,
+                characteristics.spontaneousness,
+                characteristics.tracked,
+                weights.levelMatch,
+                weights.surfaceTolerance,
+                parameters.startNode,
+                startTime
+        );
     }
 
     private AthleteGroupLine1 parseGeneralCharacteristics(String entry) {
@@ -67,16 +87,12 @@ public class AthleteGroupSectionParser implements SectionParser {
 
         int ss = scanner.nextInt();
 
-        int time = expandTime(hh, mm, ss) - expandTime(9, 0, 0);
+        int time = expandAbsoluteTime(hh, mm, ss);
         scanner.useDelimiter(" ");
         int spread = 0;
         if (scanner.hasNextInt()) spread = scanner.nextInt();
 
         return new AthleteGroupLine3(startNode, time, spread);
-    }
-
-    private int expandTime(int hh, int mm, int ss) {
-        return ss + 60 * mm + 3600 * hh;
     }
 
     private record AthleteGroupLine1(
