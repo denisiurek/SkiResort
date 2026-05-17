@@ -9,5 +9,6 @@ public interface EventQueue {
     Event fetch() throws EventQueueEmptyException;
 
     Event peek() throws EventQueueEmptyException;
+
     boolean isEmpty();
 }

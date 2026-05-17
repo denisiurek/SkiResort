@@ -8,6 +8,7 @@ import simulation.events.NonSchedulableEvent;
 
 public class AthleteEnterLiftEvent extends AthleteEvent implements NonSchedulableEvent {
     private final Lift lift;
+
     public AthleteEnterLiftEvent(int time, Athlete athlete, Lift lift) {
         super(time, athlete, athlete.isTracked() ? LogLevel.PRODUCTION : LogLevel.DEBUG);
         this.lift = lift;

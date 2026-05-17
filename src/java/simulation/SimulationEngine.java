@@ -1,15 +1,15 @@
 package simulation;
 
 
-import resort.athletes.Athlete;
-import resort.topology.SkiResort;
-import resort.topology.Connection;
-import resort.topology.Node;
-import simulation.events.Event;
-import simulation.events.NonSchedulableEvent;
 import collections.eventQueue.ArrayEventQueue;
 import collections.eventQueue.EventQueue;
 import collections.eventQueue.EventQueueEmptyException;
+import resort.athletes.Athlete;
+import resort.topology.Connection;
+import resort.topology.Node;
+import resort.topology.SkiResort;
+import simulation.events.Event;
+import simulation.events.NonSchedulableEvent;
 
 import java.util.Random;
 
@@ -17,17 +17,18 @@ public class SimulationEngine implements Scheduler {
     private final Logger logger;
     private final EventQueue eventQueue;
     private final Random random;
-    private int time;
     private final int softStopTime;
     private final int hardStopTime;
+    EngineState state;
+    private int time;
     private SkiResort resort;
     private Athlete[] athletes;
 
     public SimulationEngine(Logger logger, SimulationConfig config) {
         this.eventQueue = new ArrayEventQueue();
-        this.time = config.getStartTime();
-        this.softStopTime = config.getSoftStopTime();
-        this.hardStopTime = config.getHardStopTime();
+        this.time = config.startTime();
+        this.softStopTime = config.softStopTime();
+        this.hardStopTime = config.hardStopTime();
         this.logger = logger;
         this.state = EngineState.READY;
         this.random = new Random();
@@ -36,18 +37,10 @@ public class SimulationEngine implements Scheduler {
     public void setResort(SkiResort resort) {
         this.resort = resort;
     }
+
     public void setAthletes(Athlete[] athletes) {
         this.athletes = athletes;
     }
-
-    public enum EngineState {
-        NOT_INITIALIZED,
-        READY,
-        RUNNING,
-        SOFT_STOPPED,
-        HARD_STOPPED
-    }
-    EngineState state;
 
     public void scheduleEvent(Event event) { //rework
         if (event instanceof NonSchedulableEvent) {
@@ -94,6 +87,7 @@ public class SimulationEngine implements Scheduler {
             return EngineState.HARD_STOPPED;
         }
     }
+
     public void run() {
         state = EngineState.RUNNING;
         try {
@@ -111,13 +105,21 @@ public class SimulationEngine implements Scheduler {
             logger.log("Event queue is empty", LogLevel.DEBUG);
         } finally {
             logger.log("Summary Report", LogLevel.INFO);
-            for (Connection connection : resort.getConnections()) {
+            for (Connection connection : resort.connections()) {
                 logger.log(connection.toString(), LogLevel.INFO);
             }
-            for (Node node : resort.getNodes()) {
+            for (Node node : resort.nodes()) {
                 logger.log(node.toString(), LogLevel.DEBUG);
             }
         }
+    }
+
+    public enum EngineState {
+        NOT_INITIALIZED,
+        READY,
+        RUNNING,
+        SOFT_STOPPED,
+        HARD_STOPPED
     }
 
 }

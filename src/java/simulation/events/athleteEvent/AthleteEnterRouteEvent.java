@@ -5,8 +5,9 @@ import resort.topology.Route;
 import simulation.LogLevel;
 import simulation.Scheduler;
 
-public class AthleteEnterRouteEvent extends AthleteEvent  {
+public class AthleteEnterRouteEvent extends AthleteEvent {
     private final Route route;
+
     public AthleteEnterRouteEvent(int time, Athlete athlete, Route route) {
         super(time, athlete, athlete.isTracked() ? LogLevel.PRODUCTION : LogLevel.DEBUG);
         this.route = route;

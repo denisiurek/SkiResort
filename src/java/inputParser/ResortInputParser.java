@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class ResortInputParser implements InputParser {
     private final Scanner scanner;
+
     public ResortInputParser(InputStream inputStream) {
         this.scanner = new Scanner(inputStream);
     }

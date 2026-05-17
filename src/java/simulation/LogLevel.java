@@ -10,7 +10,7 @@ public enum LogLevel {
 
     LogLevel(int value) {this.value = value;}
 
-    public boolean allows (LogLevel other) {
+    public boolean allows(LogLevel other) {
         return this.value >= other.value;
     }
 }

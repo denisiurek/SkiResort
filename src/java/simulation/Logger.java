@@ -23,6 +23,7 @@ public class Logger {
             outputLog(event.toString());
         }
     }
+
     public void log(String entry, LogLevel logLevel) {
         if (setVerbosity.allows(logLevel)) {
             outputLog(entry);

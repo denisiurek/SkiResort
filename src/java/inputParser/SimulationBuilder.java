@@ -2,11 +2,7 @@ package inputParser;
 
 import resort.athletes.Athlete;
 import resort.athletes.AthleteDecision;
-import resort.topology.SkiResort;
-import resort.topology.Connection;
-import resort.topology.Lift;
-import resort.topology.Node;
-import resort.topology.Route;
+import resort.topology.*;
 import simulation.Logger;
 import simulation.SimulationConfig;
 import simulation.SimulationEngine;
@@ -14,6 +10,9 @@ import simulation.events.athleteEvent.AthleteArriveAtNodeEvent;
 import simulation.events.liftEvent.LiftDepartureEvent;
 
 public class SimulationBuilder {
+    private static final int INITIAL_ARRAY_SIZES = 10;
+    private final SimulationEngine engine;
+    private final int startTime;
     // Hard defined simulation parameters, per task specification.
     private SkiResort resort;
     private Athlete[] athletes;
@@ -24,9 +23,6 @@ public class SimulationBuilder {
     private int nodeCount;
     private int liftCount;
     private int routeCount;
-    private static final int INITIAL_ARRAY_SIZES = 10;
-    private final SimulationEngine engine;
-    private final int startTime;
     private NodeDef[] nodeDefs;
     private LiftDef[] liftDefs;
     private RouteDef[] routeDefs;
@@ -41,7 +37,7 @@ public class SimulationBuilder {
         this.nodeCount = 0;
         this.liftCount = 0;
         this.routeCount = 0;
-        this.startTime = config.getStartTime();
+        this.startTime = config.startTime();
         this.engine = new SimulationEngine(logger, config);
     }
 
@@ -130,6 +126,7 @@ public class SimulationBuilder {
             athleteDefs = newAthletes;
         }
     }
+
     private void ensureNodeSize(int desiredAdditionalSize) {
         if (nodeCount + desiredAdditionalSize >= nodeDefs.length) {
             NodeDef[] newNodes = new NodeDef[(nodeCount + desiredAdditionalSize) * 2];
@@ -137,6 +134,7 @@ public class SimulationBuilder {
             nodeDefs = newNodes;
         }
     }
+
     private void ensureLiftSize(int desiredAdditionalSize) {
         if (liftCount + desiredAdditionalSize >= liftDefs.length) {
             LiftDef[] newLifts = new LiftDef[(liftCount + desiredAdditionalSize) * 2];
@@ -144,6 +142,7 @@ public class SimulationBuilder {
             liftDefs = newLifts;
         }
     }
+
     private void ensureRouteSize(int desiredAdditionalSize) {
         if (routeCount + desiredAdditionalSize >= routeDefs.length) {
             RouteDef[] newRoutes = new RouteDef[(routeCount + desiredAdditionalSize) * 2];
@@ -153,7 +152,12 @@ public class SimulationBuilder {
     }
 
     private record NodeDef(int height, int x, int y, boolean communicated) {}
+
     private record LiftDef(int startNode, int endNode, int groupTimeSpread, int maxGroupSize, int liftDuration) {}
-    private record RouteDef(int startNode, int endNode, int routeDifficulty, int routeDuration, double baseRouteAttractiveness, double routeResilience) {}
-    private record AthleteDef(int skillLevel, double spontaneousness, boolean tracked, double levelMatch, double surfaceTolerance, int startNode, int startTime) {}
+
+    private record RouteDef(int startNode, int endNode, int routeDifficulty, int routeDuration,
+                            double baseRouteAttractiveness, double routeResilience) {}
+
+    private record AthleteDef(int skillLevel, double spontaneousness, boolean tracked, double levelMatch,
+                              double surfaceTolerance, int startNode, int startTime) {}
 }

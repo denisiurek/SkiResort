@@ -23,10 +23,15 @@ public class Athlete {
     }
 
     public int getId() {return id;}
+
     public int getSkill() {return skill;}
+
     public double getSpontaneousness() {return spontaneousness;}
+
     public double getWeightDifficulty() {return weightDifficulty;}
+
     public double getWeightWear() {return weightWear;}
+
     public boolean isTracked() {return tracked;}
 
     public Connection chooseNextConnection(Node node) {

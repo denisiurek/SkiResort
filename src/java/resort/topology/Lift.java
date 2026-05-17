@@ -1,9 +1,9 @@
 package resort.topology;
 
-import collections.athleteQueue.AthleteQueueEmptyException;
-import resort.athletes.Athlete;
 import collections.athleteQueue.ArrayAthleteQueue;
 import collections.athleteQueue.AthleteQueue;
+import collections.athleteQueue.AthleteQueueEmptyException;
+import resort.athletes.Athlete;
 
 public class Lift extends Connection {
     private final int departureSpread;

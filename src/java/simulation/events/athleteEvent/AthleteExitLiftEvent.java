@@ -7,6 +7,7 @@ import simulation.Scheduler;
 
 public class AthleteExitLiftEvent extends AthleteEvent {
     private final Lift lift;
+
     public AthleteExitLiftEvent(int time, Athlete athlete, Lift lift) {
         super(time, athlete, athlete.isTracked() ? LogLevel.PRODUCTION : LogLevel.DEBUG);
         this.lift = lift;

@@ -3,10 +3,10 @@ package collections.athleteQueue;
 import resort.athletes.Athlete;
 
 public class ArrayAthleteQueue implements AthleteQueue {
+    private static final int DEFAULT_SIZE = 20;
     private Athlete[] athletes;
     private int head;
     private int athleteCount;
-    private static final int DEFAULT_SIZE = 20;
 
     public ArrayAthleteQueue(int athleteCount) {
         this.athleteCount = 0;

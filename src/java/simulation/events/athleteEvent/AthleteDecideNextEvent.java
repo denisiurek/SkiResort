@@ -3,14 +3,15 @@ package simulation.events.athleteEvent;
 import resort.athletes.Athlete;
 import resort.topology.Connection;
 import resort.topology.Lift;
-import resort.topology.Route;
 import resort.topology.Node;
+import resort.topology.Route;
 import simulation.LogLevel;
 import simulation.Scheduler;
 
 public class AthleteDecideNextEvent extends AthleteEvent {
     private final Node node;
     private Connection chosenConnection;
+
     public AthleteDecideNextEvent(int time, Athlete athlete, Node node) {
         super(time, athlete, LogLevel.DEBUG);
         this.node = node;

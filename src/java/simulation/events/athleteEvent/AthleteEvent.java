@@ -11,6 +11,7 @@ public abstract class AthleteEvent extends Event {
         super(time, logLevel);
         this.athlete = athlete;
     }
+
     public Athlete getAthlete() {
         return athlete;
     }

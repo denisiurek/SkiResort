@@ -5,8 +5,9 @@ import resort.topology.Lift;
 import simulation.LogLevel;
 import simulation.Scheduler;
 
-public class AthleteEnterLiftQueueEvent extends AthleteEvent  {
+public class AthleteEnterLiftQueueEvent extends AthleteEvent {
     private final Lift lift;
+
     public AthleteEnterLiftQueueEvent(int time, Athlete athlete, Lift lift) {
         super(time, athlete, athlete.isTracked() ? LogLevel.PRODUCTION : LogLevel.DEBUG);
         this.lift = lift;

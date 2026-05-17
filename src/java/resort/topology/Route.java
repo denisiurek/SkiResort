@@ -4,6 +4,7 @@ public class Route extends Connection {
     private final int difficulty;
     private final double resilience;
     private final double baseRouteAttractiveness;
+
     public Route(int id, Node source, Node destination, int travelTime, int difficulty, double resilience,
                  double baseRouteAttractiveness) {
         super(id, source, destination, travelTime);

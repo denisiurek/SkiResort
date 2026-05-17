@@ -2,8 +2,8 @@ package resort.athletes;
 
 import resort.topology.Connection;
 import resort.topology.Lift;
-import resort.topology.Route;
 import resort.topology.Node;
+import resort.topology.Route;
 
 import java.util.Random;
 

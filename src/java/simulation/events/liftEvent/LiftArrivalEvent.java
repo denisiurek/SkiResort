@@ -8,6 +8,7 @@ import simulation.events.athleteEvent.AthleteExitLiftEvent;
 
 public class LiftArrivalEvent extends LiftEvent {
     private final Athlete[] boardedAthletes;
+
     public LiftArrivalEvent(int time, Lift lift, Athlete[] boardedAthletes) {
         super(time, lift, LogLevel.DEBUG);
         this.boardedAthletes = boardedAthletes;

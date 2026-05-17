@@ -56,6 +56,7 @@ public class ArrayEventQueue implements EventQueue {
         if (isEmpty()) throw new EventQueueEmptyException("Event queue is empty");
         return events[eventCount - 1];
     }
+
     @Override
     public boolean isEmpty() {
         return eventCount == 0;

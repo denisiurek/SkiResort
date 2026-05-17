@@ -17,12 +17,20 @@ public abstract class Connection {
     }
 
     public Node getSource() {return source;}
+
     public Node getDestination() {return destination;}
+
     public int getTravelTime() {return travelTime;}
 
-    public void registerEntry() {uses++; currentUsers++;}
+    public void registerEntry() {
+        uses++;
+        currentUsers++;
+    }
+
     public void registerExit() {currentUsers--;}
+
     public int getUses() {return uses;}
+
     public int getId() {return id;}
 
     abstract public String toString();

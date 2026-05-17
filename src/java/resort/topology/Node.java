@@ -1,14 +1,15 @@
 package resort.topology;
 
 public class Node {
+    private final static int INITIAL_CONNECTION_CAPACITY = 4;
     private final int id, height, x, y;
     private final boolean communicated;
     private Lift[] outgoingLifts;
     private int outgoingLiftCount;
     private Route[] outgoingRoutes;
     private int outgoingRouteCount;
-    private final static int INITIAL_CONNECTION_CAPACITY = 4;
     private int visits;
+
     public Node(int id, int height, int x, int y, boolean communicated) {
         this.id = id;
         this.height = height;
@@ -51,8 +52,9 @@ public class Node {
     public Lift[] getAllOutgoingLifts() {
         Lift[] lifts = new Lift[outgoingLiftCount];
         System.arraycopy(outgoingLifts, 0, lifts, 0, outgoingLiftCount);
-      return lifts;
+        return lifts;
     }
+
     public Route[] getAllOutgoingRoutes() {
         Route[] routes = new Route[outgoingRouteCount];
         System.arraycopy(outgoingRoutes, 0, routes, 0, outgoingRouteCount);
@@ -84,7 +86,9 @@ public class Node {
     }
 
     public int getId() {return id;}
+
     public void registerVisit() {visits++;}
+
     public int getVisits() {return visits;}
 
 }

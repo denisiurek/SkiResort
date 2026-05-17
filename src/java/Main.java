@@ -1,9 +1,5 @@
 import inputParser.ResortInputParser;
-import simulation.LogLevel;
-import simulation.Logger;
-import simulation.SimulationConfig;
-import simulation.SimulationEngine;
-import simulation.TimeHelper;
+import simulation.*;
 
 public class Main {
     public static void main(String[] args) {

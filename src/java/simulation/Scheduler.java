@@ -6,7 +6,10 @@ import java.util.Random;
 
 public interface Scheduler {
     void scheduleEvent(Event event);
+
     int getCurrentTime();
+
     void log(Event event);
+
     Random getRandomGenerator();
 }

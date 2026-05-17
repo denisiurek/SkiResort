@@ -7,6 +7,7 @@ import simulation.TimeHelper;
 public abstract class Event {
     private final int time;
     private final LogLevel loglevel;
+
     protected Event(int time, LogLevel loglevel) {
         this.time = time;
         this.loglevel = loglevel;
@@ -27,8 +28,9 @@ public abstract class Event {
     public boolean isFinishable() {
         return false;
     }
+
     public final String toString() {
-        return TimeHelper.formatTime(time) +": " + getEventDescription();
+        return TimeHelper.formatTime(time) + ": " + getEventDescription();
     }
 
 }
