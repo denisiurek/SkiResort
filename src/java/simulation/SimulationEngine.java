@@ -22,7 +22,7 @@ public class SimulationEngine implements Scheduler {
     EngineState state;
     private int time;
     private SkiResort resort;
-    private Athlete[] athletes;
+    private Athlete[] athletes; // retained for possible further neeeds of access
 
     public SimulationEngine(Logger logger, SimulationConfig config) {
         this.eventQueue = new ArrayEventQueue();
@@ -40,6 +40,17 @@ public class SimulationEngine implements Scheduler {
 
     public void setAthletes(Athlete[] athletes) {
         this.athletes = athletes;
+    }
+
+    public void executeEvent(Event event) {
+        if (event.getTime() > time) {
+            time = event.getTime();
+            state = getStateInTime(time);
+        }
+        if (state == EngineState.SOFT_STOPPED && !event.isFinishable() || state == EngineState.HARD_STOPPED) {
+            return;
+        }
+        event.execute(this);
     }
 
     public void scheduleEvent(Event event) { //rework
@@ -92,14 +103,7 @@ public class SimulationEngine implements Scheduler {
         state = EngineState.RUNNING;
         try {
             while (state != EngineState.HARD_STOPPED) {
-                Event event = eventQueue.fetch();
-                if (event.getTime() > time) {
-                    time = event.getTime();
-                    state = getStateInTime(time);
-                }
-                if (state != EngineState.HARD_STOPPED) {
-                    event.execute(this);
-                }
+                executeEvent(eventQueue.fetch());
             }
         } catch (EventQueueEmptyException e) {
             logger.log("Event queue is empty", LogLevel.DEBUG);

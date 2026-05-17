@@ -1,7 +1,7 @@
 package inputParser;
 
 import resort.athletes.Athlete;
-import resort.athletes.AthleteDecision;
+import resort.athletes.AthleteCombinedDecision;
 import resort.topology.*;
 import simulation.Logger;
 import simulation.SimulationConfig;
@@ -101,7 +101,7 @@ public class SimulationBuilder {
 
     private void buildAthletes() {
         athletes = new Athlete[athleteCount];
-        resort.athletes.AthleteDecisionPolicy decisionPolicy = new AthleteDecision(engine.getRandomGenerator());
+        resort.athletes.AthleteDecisionPolicy decisionPolicy = new AthleteCombinedDecision(engine.getRandomGenerator());
         for (int i = 0; i < athleteCount; i++) {
             AthleteDef def = athleteDefs[i];
             athletes[i] = new Athlete(i, def.skillLevel, def.spontaneousness, def.levelMatch, def.surfaceTolerance, def.tracked, decisionPolicy);

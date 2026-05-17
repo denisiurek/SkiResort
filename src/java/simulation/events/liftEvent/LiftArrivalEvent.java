@@ -18,7 +18,7 @@ public class LiftArrivalEvent extends LiftEvent {
     public void execute(Scheduler scheduler) {
         scheduler.log(this);
         for (Athlete athlete : boardedAthletes) {
-            scheduler.scheduleEvent(new AthleteExitLiftEvent(scheduler.getCurrentTime(), athlete, lift));
+            scheduler.executeEvent(new AthleteExitLiftEvent(scheduler.getCurrentTime(), athlete, lift));
         }
     }
 

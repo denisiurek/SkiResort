@@ -4,8 +4,9 @@ import resort.athletes.Athlete;
 import resort.topology.Lift;
 import simulation.LogLevel;
 import simulation.Scheduler;
+import simulation.events.NonSchedulableEvent;
 
-public class AthleteEnterLiftQueueEvent extends AthleteEvent {
+public class AthleteEnterLiftQueueEvent extends AthleteEvent implements NonSchedulableEvent {
     private final Lift lift;
 
     public AthleteEnterLiftQueueEvent(int time, Athlete athlete, Lift lift) {

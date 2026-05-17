@@ -21,7 +21,7 @@ public class AthleteArriveAtNodeEvent extends AthleteEvent {
     public void execute(Scheduler scheduler) {
         node.registerVisit();
         scheduler.log(this);
-        scheduler.scheduleEvent(new AthleteDecideNextEvent(scheduler.getCurrentTime(), athlete, node));
+        scheduler.executeEvent(new AthleteDecideNextEvent(scheduler.getCurrentTime(), athlete, node));
     }
 
     @Override

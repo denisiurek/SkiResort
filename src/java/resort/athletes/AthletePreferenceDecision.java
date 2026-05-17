@@ -5,24 +5,11 @@ import resort.topology.Lift;
 import resort.topology.Node;
 import resort.topology.Route;
 
-import java.util.Random;
-
-public class AthleteDecision implements AthleteDecisionPolicy {
-    private final Random random;
-
-    public AthleteDecision(Random random) {
-        this.random = random;
+public class AthletePreferenceDecision implements AthleteDecisionPolicy {
+    public AthletePreferenceDecision() {
     }
-
-    public AthleteDecision() {
-        this(new Random());
-    }
-
+    @Override
     public Connection chooseConnection(Athlete athlete, Node node) {
-        double spontaneousness = athlete.getSpontaneousness();
-        if (random.nextDouble() <= spontaneousness) {
-            return chooseRandomConnection(node);
-        }
         Route[] routes = node.getAllOutgoingRoutes();
         Lift[] lifts = node.getAllOutgoingLifts();
         Lift neededLiftToTake = null;
@@ -48,8 +35,7 @@ public class AthleteDecision implements AthleteDecisionPolicy {
         }
         return chosenRoute;
     }
-
-    private double rateRoute(Athlete athlete, Route route) {
+        private double rateRoute(Athlete athlete, Route route) {
         double difficultyRating = getDifficultyRating(athlete, route);
         double wearRating = route.getWear();
         return difficultyRating * athlete.getWeightDifficulty() + wearRating * athlete.getWeightWear();
@@ -62,17 +48,6 @@ public class AthleteDecision implements AthleteDecisionPolicy {
             return 1 - (route.getDifficulty() - athlete.getSkill()) / 5.0;
         } else {
             return Math.max(0.2, 1 - (athlete.getSkill() - route.getDifficulty()) / 7.0);
-        }
-    }
-
-    private Connection chooseRandomConnection(Node node) {
-        int totalConnections = node.getOutgoingLiftCount() + node.getOutgoingRouteCount();
-        if (totalConnections == 0) return null; // Safe guard
-        int randomIndex = random.nextInt(totalConnections);
-        if (randomIndex < node.getOutgoingLiftCount()) {
-            return node.getOutgoingLift(randomIndex);
-        } else {
-            return node.getOutgoingRoute(randomIndex - node.getOutgoingLiftCount());
         }
     }
 }

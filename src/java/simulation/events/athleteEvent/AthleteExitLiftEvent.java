@@ -4,8 +4,9 @@ import resort.athletes.Athlete;
 import resort.topology.Lift;
 import simulation.LogLevel;
 import simulation.Scheduler;
+import simulation.events.NonSchedulableEvent;
 
-public class AthleteExitLiftEvent extends AthleteEvent {
+public class AthleteExitLiftEvent extends AthleteEvent implements NonSchedulableEvent {
     private final Lift lift;
 
     public AthleteExitLiftEvent(int time, Athlete athlete, Lift lift) {
@@ -17,7 +18,7 @@ public class AthleteExitLiftEvent extends AthleteEvent {
     public void execute(Scheduler scheduler) {
         lift.registerExit();
         scheduler.log(this);
-        scheduler.scheduleEvent(new AthleteArriveAtNodeEvent(scheduler.getCurrentTime(), athlete, lift.getDestination()));
+        scheduler.executeEvent(new AthleteArriveAtNodeEvent(scheduler.getCurrentTime(), athlete, lift.getDestination()));
     }
 
 
