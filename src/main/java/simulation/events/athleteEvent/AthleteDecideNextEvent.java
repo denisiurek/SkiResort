@@ -1,7 +1,6 @@
 package simulation.events.athleteEvent;
 
 import resort.athletes.Athlete;
-import resort.athletes.AthleteDecision;
 import resort.topology.Connection;
 import resort.topology.Lift;
 import resort.topology.Route;
@@ -19,7 +18,7 @@ public class AthleteDecideNextEvent extends AthleteEvent {
 
     @Override
     public void execute(Scheduler scheduler) {
-        Connection chosenConnection = new AthleteDecision().chooseConnection(athlete, node);
+        Connection chosenConnection = athlete.chooseNextConnection(node);
         if (chosenConnection instanceof Lift) {
             scheduler.scheduleEvent(new AthleteEnterLiftQueueEvent(getTime(), athlete, (Lift) chosenConnection));
         } else scheduler.scheduleEvent(new AthleteEnterRouteEvent(getTime(), athlete, (Route) chosenConnection));

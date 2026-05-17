@@ -2,8 +2,8 @@ package simulation;
 
 public enum LogLevel {
     NONE(0),
-    PRODUCTION(1),
-    VERBOSE(2),
+    INFO(1),
+    PRODUCTION(2),
     DEBUG(3);
 
     private final int value;

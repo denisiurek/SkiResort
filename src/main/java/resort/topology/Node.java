@@ -63,8 +63,6 @@ public class Node {
         return communicated;
     }
 
-    // TODO: Add getters for height/x/y if needed for later visualization.
-
     public String toString() {
         return "Node " + (communicated ? "s" : "") + id + ", (x, y, height) = (" + x + ", " + y + ", " + height + ")" + ", totalVisits = " + visits;
     }

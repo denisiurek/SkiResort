@@ -1,7 +1,4 @@
-package resort;
-
-import resort.topology.Connection;
-import resort.topology.Node;
+package resort.topology;
 
 public class SkiResort {
     private final Node[] nodes;
@@ -10,6 +7,13 @@ public class SkiResort {
     public SkiResort(Node[] nodes, Connection[] connections) {
         this.nodes = nodes;
         this.connections = connections;
+    }
+
+    public Connection[] getConnections() {
+        return connections;
+    }
+    public Node[] getNodes() {
+        return nodes;
     }
 
 }

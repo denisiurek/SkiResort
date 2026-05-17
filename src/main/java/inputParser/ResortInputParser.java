@@ -22,7 +22,7 @@ public class ResortInputParser implements InputParser {
     }
 
     @Override
-    public SimulationEngine parse(Logger logger, SimulationConfig config) {
+    public SimulationEngine parse(Logger logger, SimulationConfig config) throws IncorrectFormattingException {
         SimulationBuilder builder = new SimulationBuilder(config, logger);
         int currentLine = 1;
         try {

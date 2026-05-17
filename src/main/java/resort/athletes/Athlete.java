@@ -1,5 +1,8 @@
 package resort.athletes;
 
+import resort.topology.Connection;
+import resort.topology.Node;
+
 public class Athlete {
     private final int id;
     private final int skill;
@@ -7,14 +10,16 @@ public class Athlete {
     private final double weightDifficulty;
     private final double weightWear;
     private final boolean tracked;
+    private final AthleteDecisionPolicy decisionPolicy;
 
-    public Athlete(int id, int skill, double spontaneousness, double weightDifficulty, double weightWear, boolean tracked) {
+    public Athlete(int id, int skill, double spontaneousness, double weightDifficulty, double weightWear, boolean tracked, AthleteDecisionPolicy decisionPolicy) {
         this.id = id;
         this.skill = skill;
         this.spontaneousness = spontaneousness;
         this.weightDifficulty = weightDifficulty;
         this.weightWear = weightWear;
         this.tracked = tracked;
+        this.decisionPolicy = decisionPolicy;
     }
 
     public int getId() {return id;}
@@ -24,6 +29,8 @@ public class Athlete {
     public double getWeightWear() {return weightWear;}
     public boolean isTracked() {return tracked;}
 
-    //public Decision makeDecision(Node currentNode){return null;}
+    public Connection chooseNextConnection(Node node) {
+        return decisionPolicy.chooseConnection(this, node);
+    }
 
 }

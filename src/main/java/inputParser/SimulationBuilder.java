@@ -1,7 +1,8 @@
 package inputParser;
 
 import resort.athletes.Athlete;
-import resort.SkiResort;
+import resort.athletes.AthleteDecision;
+import resort.topology.SkiResort;
 import resort.topology.Connection;
 import resort.topology.Lift;
 import resort.topology.Node;
@@ -104,9 +105,10 @@ public class SimulationBuilder {
 
     private void buildAthletes() {
         athletes = new Athlete[athleteCount];
+        resort.athletes.AthleteDecisionPolicy decisionPolicy = new AthleteDecision(engine.getRandomGenerator());
         for (int i = 0; i < athleteCount; i++) {
             AthleteDef def = athleteDefs[i];
-            athletes[i] = new Athlete(i, def.skillLevel, def.spontaneousness, def.levelMatch, def.surfaceTolerance, def.tracked);
+            athletes[i] = new Athlete(i, def.skillLevel, def.spontaneousness, def.levelMatch, def.surfaceTolerance, def.tracked, decisionPolicy);
         }
     }
 

@@ -3,17 +3,17 @@ import simulation.LogLevel;
 import simulation.Logger;
 import simulation.SimulationConfig;
 import simulation.SimulationEngine;
-import timeUtils.TimeOperators;
+import timeHelper.TimeHelper;
 
 public class Main {
     public static void main(String[] args) {
         SimulationConfig config = new SimulationConfig(
-                TimeOperators.expandAbsoluteTime(9, 0, 0),
-                TimeOperators.expandAbsoluteTime(15, 0, 0),
-                TimeOperators.expandAbsoluteTime(16, 0, 0)
+                TimeHelper.expandAbsoluteTime(9, 0, 0),
+                TimeHelper.expandAbsoluteTime(15, 0, 0),
+                TimeHelper.expandAbsoluteTime(16, 0, 0)
         );
         SimulationEngine engine = new ResortInputParser(System.in)
-                .parse(new Logger(System.out, LogLevel.PRODUCTION), config);
+                .parse(new Logger(System.out, LogLevel.INFO), config);
         engine.run();
     }
 }

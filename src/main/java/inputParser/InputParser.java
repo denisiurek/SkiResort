@@ -5,5 +5,5 @@ import simulation.SimulationConfig;
 import simulation.SimulationEngine;
 
 public interface InputParser {
-    SimulationEngine parse(Logger logger, SimulationConfig config);
+    SimulationEngine parse(Logger logger, SimulationConfig config) throws IncorrectFormattingException;
 }

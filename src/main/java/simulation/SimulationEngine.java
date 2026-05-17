@@ -2,17 +2,21 @@ package simulation;
 
 
 import resort.athletes.Athlete;
-import resort.SkiResort;
+import resort.topology.SkiResort;
+import resort.topology.Connection;
+import resort.topology.Node;
 import simulation.events.Event;
 import simulation.events.NonSchedulableEvent;
 import collections.eventQueue.ArrayEventQueue;
 import collections.eventQueue.EventQueue;
 import collections.eventQueue.EventQueueEmptyException;
-import timeUtils.TimeOperators;
+
+import java.util.Random;
 
 public class SimulationEngine implements Scheduler {
     private final Logger logger;
     private final EventQueue eventQueue;
+    private final Random random;
     private int time;
     private final int softStopTime;
     private final int hardStopTime;
@@ -26,6 +30,7 @@ public class SimulationEngine implements Scheduler {
         this.hardStopTime = config.getHardStopTime();
         this.logger = logger;
         this.state = EngineState.READY;
+        this.random = new Random();
     }
 
     public void setResort(SkiResort resort) {
@@ -75,6 +80,11 @@ public class SimulationEngine implements Scheduler {
         logger.log(event);
     }
 
+    @Override
+    public Random getRandomGenerator() {
+        return random;
+    }
+
     private EngineState getStateInTime(int time) {
         if (time < softStopTime) {
             return EngineState.RUNNING;
@@ -92,13 +102,21 @@ public class SimulationEngine implements Scheduler {
                 if (event.getTime() > time) {
                     time = event.getTime();
                     state = getStateInTime(time);
-                } else {
+                }
+                if (state != EngineState.HARD_STOPPED) {
                     event.execute(this);
                 }
-
             }
         } catch (EventQueueEmptyException e) {
-            System.out.println("Event queue is empty. Simulation ended at time " + TimeOperators.formatTime(time));
+            logger.log("Event queue is empty", LogLevel.DEBUG);
+        } finally {
+            logger.log("Summary Report", LogLevel.INFO);
+            for (Connection connection : resort.getConnections()) {
+                logger.log(connection.toString(), LogLevel.INFO);
+            }
+            for (Node node : resort.getNodes()) {
+                logger.log(node.toString(), LogLevel.DEBUG);
+            }
         }
     }
 

@@ -2,7 +2,7 @@ package simulation.events;
 
 import simulation.LogLevel;
 import simulation.Scheduler;
-import timeUtils.TimeOperators;
+import timeHelper.TimeHelper;
 
 public abstract class Event {
     private final int time;
@@ -28,7 +28,7 @@ public abstract class Event {
         return false;
     }
     public final String toString() {
-        return "["+TimeOperators.formatTime(time) +"] " + getEventDescription();
+        return TimeHelper.formatTime(time) +": " + getEventDescription();
     }
 
 }

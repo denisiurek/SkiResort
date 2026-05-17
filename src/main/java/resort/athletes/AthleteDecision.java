@@ -5,10 +5,22 @@ import resort.topology.Lift;
 import resort.topology.Route;
 import resort.topology.Node;
 
-public class AthleteDecision {
+import java.util.Random;
+
+public class AthleteDecision implements AthleteDecisionPolicy {
+    private final Random random;
+
+    public AthleteDecision(Random random) {
+        this.random = random;
+    }
+
+    public AthleteDecision() {
+        this(new Random());
+    }
+
     public Connection chooseConnection(Athlete athlete, Node node) {
         double spontaneousness = athlete.getSpontaneousness();
-        if (Math.random() <= spontaneousness) {
+        if (random.nextDouble() <= spontaneousness) {
             return chooseRandomConnection(node);
         }
         Route[] routes = node.getAllOutgoingRoutes();
@@ -52,9 +64,11 @@ public class AthleteDecision {
             return Math.max(0.2, 1 - (athlete.getSkill() - route.getDifficulty()) / 7.0);
         }
     }
+
     private Connection chooseRandomConnection(Node node) {
         int totalConnections = node.getOutgoingLiftCount() + node.getOutgoingRouteCount();
-        int randomIndex = (int) (Math.random() * totalConnections);
+        if (totalConnections == 0) return null; // Safe guard
+        int randomIndex = random.nextInt(totalConnections);
         if (randomIndex < node.getOutgoingLiftCount()) {
             return node.getOutgoingLift(randomIndex);
         } else {

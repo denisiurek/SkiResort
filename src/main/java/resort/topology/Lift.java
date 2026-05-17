@@ -1,5 +1,6 @@
 package resort.topology;
 
+import collections.athleteQueue.AthleteQueueEmptyException;
 import resort.athletes.Athlete;
 import collections.athleteQueue.ArrayAthleteQueue;
 import collections.athleteQueue.AthleteQueue;
@@ -13,11 +14,10 @@ public class Lift extends Connection {
         super(id, source, destination, travelTime);
         this.capacity = capacity;
         this.departureSpread = departureSpread;
-        this.queue = new ArrayAthleteQueue(capacity*2);
+        this.queue = new ArrayAthleteQueue(capacity * 2);
     }
 
     public int getDepartureSpread() {return departureSpread;}
-    public int getCapacity() {return capacity;}
 
     public void enqueue(Athlete athlete) {
         queue.add(athlete);
@@ -30,12 +30,17 @@ public class Lift extends Connection {
             try {
                 passengers[taken] = queue.fetch();
                 taken++;
-            } catch (Exception e) {
+            } catch (AthleteQueueEmptyException e) {
                 break; // Queue is empty.
             }
         }
         Athlete[] passengersTaken = new Athlete[taken];
         System.arraycopy(passengers, 0, passengersTaken, 0, taken);
         return passengersTaken;
+    }
+
+    @Override
+    public String toString() {
+        return "Lift " + getId() + " from " + getSource().getId() + " to " + getDestination().getId() + ", took: " + getUses() + " athletes";
     }
 }

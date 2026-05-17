@@ -2,9 +2,6 @@ package collections.athleteQueue;
 
 import resort.athletes.Athlete;
 
-/*
- * TODO: MAKE A CYCLIC BUFFER INSTEAD TO REDUCE THE MEM COPY
- */
 public class ArrayAthleteQueue implements AthleteQueue {
     private Athlete[] athletes;
     private int head;

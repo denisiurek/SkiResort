@@ -18,7 +18,7 @@ public class LiftDepartureEvent extends LiftEvent {
         boardedAthletes = lift.takePassengers(); // If thee lift carts were to be tracked this could become
         // a lift cart object that could interpolate its position based on nodes and departure-arrival times.
         for (Athlete athlete : boardedAthletes) {
-            new AthleteEnterLiftEvent(getTime(), athlete, lift).execute(scheduler); // TODO: This should not be
+            new AthleteEnterLiftEvent(getTime(), athlete, lift).execute(scheduler);
         }
         scheduler.scheduleEvent(new LiftArrivalEvent(getTime() + lift.getTravelTime(), lift, boardedAthletes));
         scheduler.scheduleEvent(new LiftDepartureEvent(getTime() + lift.getDepartureSpread(), lift));

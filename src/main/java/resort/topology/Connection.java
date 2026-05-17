@@ -5,9 +5,9 @@ public abstract class Connection {
     private final Node source;
     private final Node destination;
     private int uses;
-    private int currentUsers;
+    private int currentUsers; // for later statistics I want to play around with.
 
-    Connection(int id, Node source, Node destination, int travelTime) {
+    protected Connection(int id, Node source, Node destination, int travelTime) {
         this.id = id;
         this.travelTime = travelTime;
         this.source = source;
@@ -24,4 +24,6 @@ public abstract class Connection {
     public void registerExit() {currentUsers--;}
     public int getUses() {return uses;}
     public int getId() {return id;}
+
+    abstract public String toString();
 }

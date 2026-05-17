@@ -13,11 +13,14 @@ public class Route extends Connection {
     }
 
     public int getDifficulty() {return difficulty;}
-    public double getResilience() {return resilience;}
-    public double getBaseRouteAttractiveness() {return baseRouteAttractiveness;}
 
     public double getWear() {
         return baseRouteAttractiveness + (1 - baseRouteAttractiveness) * Math.pow(resilience, getUses());
     }
 
+    @Override
+    public String toString() {
+        return "Route " + getId() + " from " + getSource().getId() + " to " + getDestination().getId() + ", taken by:" +
+                " " + getUses() + " athletes";
+    }
 }
