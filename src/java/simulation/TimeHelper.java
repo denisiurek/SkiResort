@@ -1,4 +1,4 @@
-package timeHelper;
+package simulation;
 
 public class TimeHelper {
     public static int expandAbsoluteTime(int hh, int mm, int ss) {

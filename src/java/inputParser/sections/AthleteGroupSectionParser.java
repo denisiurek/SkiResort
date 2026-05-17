@@ -6,7 +6,7 @@ import inputParser.SimulationBuilder;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import static timeHelper.TimeHelper.expandAbsoluteTime;
+import static simulation.TimeHelper.expandAbsoluteTime;
 
 public class AthleteGroupSectionParser implements SectionParser {
     @Override

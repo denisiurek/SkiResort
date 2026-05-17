@@ -3,7 +3,7 @@ import simulation.LogLevel;
 import simulation.Logger;
 import simulation.SimulationConfig;
 import simulation.SimulationEngine;
-import timeHelper.TimeHelper;
+import simulation.TimeHelper;
 
 public class Main {
     public static void main(String[] args) {

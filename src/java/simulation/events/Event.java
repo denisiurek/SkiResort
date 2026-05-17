@@ -2,7 +2,7 @@ package simulation.events;
 
 import simulation.LogLevel;
 import simulation.Scheduler;
-import timeHelper.TimeHelper;
+import simulation.TimeHelper;
 
 public abstract class Event {
     private final int time;
