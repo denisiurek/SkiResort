@@ -24,8 +24,8 @@ public class SimulationBuilder {
     private int liftCount;
     private int routeCount;
     private static final int INITIAL_ARRAY_SIZES = 10;
-    private SimulationEngine engine;
-    private int startTime;
+    private final SimulationEngine engine;
+    private final int startTime;
     private NodeDef[] nodeDefs;
     private LiftDef[] liftDefs;
     private RouteDef[] routeDefs;

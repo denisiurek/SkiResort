@@ -1,12 +1,12 @@
 package resort.athletes;
 
 public class Athlete {
-    private int id;
-    private int skill;
-    private double spontaneousness;
-    private double weightDifficulty;
-    private double weightWear;
-    private boolean tracked;
+    private final int id;
+    private final int skill;
+    private final double spontaneousness;
+    private final double weightDifficulty;
+    private final double weightWear;
+    private final boolean tracked;
 
     public Athlete(int id, int skill, double spontaneousness, double weightDifficulty, double weightWear, boolean tracked) {
         this.id = id;

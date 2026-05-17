@@ -7,7 +7,7 @@ import collections.athleteQueue.AthleteQueue;
 public class Lift extends Connection {
     private final int departureSpread;
     private final int capacity;
-    private AthleteQueue queue;
+    private final AthleteQueue queue;
 
     public Lift(int id, Node source, Node destination, int travelTime, int departureSpread, int capacity) {
         super(id, source, destination, travelTime);

@@ -5,7 +5,7 @@ import simulation.LogLevel;
 import simulation.events.Event;
 
 abstract public class LiftEvent extends Event {
-    protected Lift lift;
+    protected final Lift lift;
     protected LiftEvent(int time, Lift lift, LogLevel logLevel) {
         super(time, logLevel);
         this.lift = lift;

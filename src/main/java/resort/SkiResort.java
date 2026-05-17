@@ -4,8 +4,8 @@ import resort.topology.Connection;
 import resort.topology.Node;
 
 public class SkiResort {
-    private Node[] nodes;
-    private Connection[] connections;
+    private final Node[] nodes;
+    private final Connection[] connections;
 
     public SkiResort(Node[] nodes, Connection[] connections) {
         this.nodes = nodes;

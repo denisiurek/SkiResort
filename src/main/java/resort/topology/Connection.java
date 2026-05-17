@@ -2,8 +2,8 @@ package resort.topology;
 
 public abstract class Connection {
     private final int id, travelTime;
-    private Node source;
-    private Node destination;
+    private final Node source;
+    private final Node destination;
     private int uses;
     private int currentUsers;
 

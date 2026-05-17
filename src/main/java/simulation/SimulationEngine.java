@@ -11,11 +11,11 @@ import collections.eventQueue.EventQueueEmptyException;
 import timeUtils.TimeOperators;
 
 public class SimulationEngine implements Scheduler {
-    private Logger logger;
-    private EventQueue eventQueue;
+    private final Logger logger;
+    private final EventQueue eventQueue;
     private int time;
-    private int softStopTime;
-    private int hardStopTime;
+    private final int softStopTime;
+    private final int hardStopTime;
     private SkiResort resort;
     private Athlete[] athletes;
 

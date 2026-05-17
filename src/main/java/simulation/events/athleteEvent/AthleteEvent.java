@@ -5,7 +5,7 @@ import simulation.LogLevel;
 import simulation.events.Event;
 
 public abstract class AthleteEvent extends Event {
-    protected Athlete athlete;
+    protected final Athlete athlete;
 
     protected AthleteEvent(int time, Athlete athlete, LogLevel logLevel) {
         super(time, logLevel);

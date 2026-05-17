@@ -46,14 +46,14 @@ public class ArrayEventQueue implements EventQueue {
 
     @Override
     public Event fetch() throws EventQueueEmptyException {
-        if (isEmpty()) throw new EventQueueEmptyException("q emty");
+        if (isEmpty()) throw new EventQueueEmptyException("Event queue is empty");
         Event event = events[--eventCount];
         events[eventCount] = null;
         return event;
     }
 
     public Event peek() throws EventQueueEmptyException {
-        if (isEmpty()) throw new EventQueueEmptyException("q emty");
+        if (isEmpty()) throw new EventQueueEmptyException("Event queue is empty");
         return events[eventCount - 1];
     }
     @Override
