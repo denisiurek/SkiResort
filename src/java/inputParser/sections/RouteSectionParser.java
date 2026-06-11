@@ -3,6 +3,7 @@ package inputParser.sections;
 import inputParser.IncorrectFormattingException;
 import inputParser.SimulationBuilder;
 
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class RouteSectionParser implements SectionParser {
         for (int i = 0; i < entries.length; i++) {
             try {
                 Scanner lineScanner = new Scanner(entries[i]);
-
+                lineScanner.useLocale(Locale.ENGLISH);
                 int startNode = lineScanner.nextInt();
 
                 int endNode = lineScanner.nextInt();

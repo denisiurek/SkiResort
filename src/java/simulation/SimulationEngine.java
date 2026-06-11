@@ -19,7 +19,7 @@ public class SimulationEngine implements Scheduler {
     private final Random random;
     private final int softStopTime;
     private final int hardStopTime;
-    EngineState state;
+    private EngineState state;
     private int time;
     private SkiResort resort;
     private Athlete[] athletes; // retained for possible further neeeds of access

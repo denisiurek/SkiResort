@@ -5,7 +5,7 @@ import simulation.events.Event;
 public class ArrayEventQueue implements EventQueue {
     private static final int DEFAULT_SIZE = 100;
     Event[] events;
-    int eventCount;
+    private int eventCount;
 
     public ArrayEventQueue() {
         this(DEFAULT_SIZE);

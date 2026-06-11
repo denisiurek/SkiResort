@@ -3,29 +3,30 @@ package inputParser.sections;
 import inputParser.IncorrectFormattingException;
 import inputParser.SimulationBuilder;
 
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class NodeSectionParser implements SectionParser {
-    @Override
-    public void parseSection(String[] entries, SimulationBuilder builder) throws IncorrectFormattingException {
-        for (int i = 0; i < entries.length; i++) {
-            try {
-                Scanner lineScanner = new Scanner(entries[i]);
+  @Override
+  public void parseSection(String[] entries, SimulationBuilder builder) throws IncorrectFormattingException {
+    for (int i = 0; i < entries.length; i++) {
+      try {
+        Scanner lineScanner = new Scanner(entries[i]);
+        lineScanner.useLocale(Locale.ENGLISH);
+        int height = lineScanner.nextInt();
 
-                int height = lineScanner.nextInt();
+        int x = lineScanner.nextInt();
 
-                int x = lineScanner.nextInt();
+        int y = lineScanner.nextInt();
 
-                int y = lineScanner.nextInt();
+        boolean communicated = lineScanner.hasNext("s");
 
-                boolean communicated = lineScanner.hasNext("s");
-
-                builder.addNode(height, x, y, communicated);
-            } catch (NoSuchElementException e) {
-                throw new IncorrectFormattingException("Incorrect formatting " +
-                        "in node section", i);
-            }
-        }
+        builder.addNode(height, x, y, communicated);
+      } catch (NoSuchElementException e) {
+        throw new IncorrectFormattingException("Incorrect formatting " +
+            "in node section", i);
+      }
     }
+  }
 }
