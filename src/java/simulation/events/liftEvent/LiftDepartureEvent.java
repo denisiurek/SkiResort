@@ -6,8 +6,10 @@ import simulation.LogLevel;
 import simulation.Scheduler;
 import simulation.events.athleteEvent.AthleteEnterLiftEvent;
 
+import java.util.List;
+
 public class LiftDepartureEvent extends LiftEvent {
-    private Athlete[] boardedAthletes;
+    private List<Athlete> boardedAthletes;
 
     public LiftDepartureEvent(int time, Lift lift) {
         super(time, lift, LogLevel.DEBUG);
@@ -16,8 +18,8 @@ public class LiftDepartureEvent extends LiftEvent {
     @Override
     public void execute(Scheduler scheduler) {
 
-        boardedAthletes = lift.takePassengers(); // If thee lift carts were to be tracked this could become
-        // a lift cart object that could interpolate its position based on nodes and departure-arrival times.
+        boardedAthletes = lift.takePassengers();
+
         for (Athlete athlete : boardedAthletes) {
             scheduler.executeEvent(new AthleteEnterLiftEvent(getTime(), athlete, lift));
         }
@@ -34,6 +36,6 @@ public class LiftDepartureEvent extends LiftEvent {
 
     @Override
     protected String getEventDescription() {
-        return "Lift " + lift.getId() + " departed from " + lift.getSource().getId() + " with " + boardedAthletes.length + " athletes.";
+        return "Lift " + lift.getId() + " departed from " + lift.getSource().getId() + " with " + boardedAthletes.size() + " athletes.";
     }
 }

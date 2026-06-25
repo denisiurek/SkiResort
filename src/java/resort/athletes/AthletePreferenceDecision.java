@@ -5,23 +5,25 @@ import resort.topology.Lift;
 import resort.topology.Node;
 import resort.topology.Route;
 
+import java.util.List;
+
 public class AthletePreferenceDecision implements AthleteDecisionPolicy {
     public AthletePreferenceDecision() {
     }
     @Override
     public Connection chooseConnection(Athlete athlete, Node node) {
-        Route[] routes = node.getAllOutgoingRoutes();
-        Lift[] lifts = node.getAllOutgoingLifts();
+        List<Route> routes = node.getAllOutgoingRoutes();
+        List<Lift> lifts = node.getAllOutgoingLifts();
         Lift neededLiftToTake = null;
         Route chosenRoute = null;
         double currentBestRouteRating = Double.NEGATIVE_INFINITY;
-        for (Route route : routes) {
+        for (Route route : routes) { // mappable TODO
             if (rateRoute(athlete, route) > currentBestRouteRating) {
                 currentBestRouteRating = rateRoute(athlete, route);
                 chosenRoute = route;
             }
         }
-        for (Lift lift : lifts) {
+        for (Lift lift : lifts) { // mappable TODO
             for (Route route : lift.getDestination().getAllOutgoingRoutes()) {
                 if (rateRoute(athlete, route) > currentBestRouteRating) {
                     currentBestRouteRating = rateRoute(athlete, route);

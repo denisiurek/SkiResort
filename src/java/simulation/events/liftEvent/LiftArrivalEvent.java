@@ -6,10 +6,12 @@ import simulation.LogLevel;
 import simulation.Scheduler;
 import simulation.events.athleteEvent.AthleteExitLiftEvent;
 
-public class LiftArrivalEvent extends LiftEvent {
-    private final Athlete[] boardedAthletes;
+import java.util.List;
 
-    public LiftArrivalEvent(int time, Lift lift, Athlete[] boardedAthletes) {
+public class LiftArrivalEvent extends LiftEvent {
+    private final List<Athlete> boardedAthletes;
+
+    public LiftArrivalEvent(int time, Lift lift, List<Athlete> boardedAthletes) {
         super(time, lift, LogLevel.DEBUG);
         this.boardedAthletes = boardedAthletes;
     }
@@ -29,6 +31,6 @@ public class LiftArrivalEvent extends LiftEvent {
 
     @Override
     protected String getEventDescription() {
-        return "Lift " + lift.getId() + " arrived at node " + lift.getDestination().getId() + " with " + boardedAthletes.length + " athletes.";
+        return "Lift " + lift.getId() + " arrived at node " + lift.getDestination().getId() + " with " + boardedAthletes.size() + " athletes.";
     }
 }

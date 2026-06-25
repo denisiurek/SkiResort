@@ -1,5 +1,7 @@
 package resort.topology;
 
-public record SkiResort(Node[] nodes, Connection[] connections) {
+import java.util.List;
+
+public record SkiResort(List<Node> nodes, List<Connection> connections) {
 
 }

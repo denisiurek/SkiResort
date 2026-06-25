@@ -1,44 +1,46 @@
 package simulation;
 
 
-import collections.eventQueue.ArrayEventQueue;
-import collections.eventQueue.EventQueue;
-import collections.eventQueue.EventQueueEmptyException;
+
+
+
 import resort.athletes.Athlete;
-import resort.topology.Connection;
-import resort.topology.Node;
 import resort.topology.SkiResort;
 import simulation.events.Event;
 import simulation.events.NonSchedulableEvent;
 
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Random;
 
 public class SimulationEngine implements Scheduler {
     private final Logger logger;
-    private final EventQueue eventQueue;
+    private final Queue<Event> eventQueue;
     private final Random random;
     private final int softStopTime;
     private final int hardStopTime;
     private EngineState state;
     private int time;
     private SkiResort resort;
-    private Athlete[] athletes; // retained for possible further neeeds of access
-
+    private List<Athlete> athletes; // retained for possible further needs of access
+    private int scheduleCount;
     public SimulationEngine(Logger logger, SimulationConfig config) {
-        this.eventQueue = new ArrayEventQueue();
+        this.eventQueue = new PriorityQueue<>();
         this.time = config.startTime();
         this.softStopTime = config.softStopTime();
         this.hardStopTime = config.hardStopTime();
         this.logger = logger;
         this.state = EngineState.READY;
         this.random = new Random();
+        this.scheduleCount = 0;
     }
 
     public void setResort(SkiResort resort) {
         this.resort = resort;
     }
 
-    public void setAthletes(Athlete[] athletes) {
+    public void setAthletes(List<Athlete> athletes) {
         this.athletes = athletes;
     }
 
@@ -63,10 +65,12 @@ public class SimulationEngine implements Scheduler {
                 break;
             case SOFT_STOPPED:
                 if (event.isFinishable()) {
+                    event.setPriority(scheduleCount++);
                     eventQueue.add(event);
                 }
                 break;
             case RUNNING:
+                event.setPriority(scheduleCount++);
                 eventQueue.add(event);
                 break;
             default:
@@ -101,22 +105,15 @@ public class SimulationEngine implements Scheduler {
 
     public void run() {
         state = EngineState.RUNNING;
-        try {
-            while (state != EngineState.HARD_STOPPED) {
-                executeEvent(eventQueue.fetch());
-            }
-        } catch (EventQueueEmptyException e) {
-            logger.log("Event queue is empty", LogLevel.DEBUG);
-        } finally {
-            logger.log("Summary Report", LogLevel.INFO);
-            for (Connection connection : resort.connections()) {
-                logger.log(connection.toString(), LogLevel.INFO);
-            }
-            for (Node node : resort.nodes()) {
-                logger.log(node.toString(), LogLevel.DEBUG);
-            }
+        Event event;
+        while (state != EngineState.HARD_STOPPED && (event = eventQueue.poll()) != null) {
+            executeEvent(event);
         }
-    }
+            logger.log("Summary Report", LogLevel.INFO);
+            resort.connections().forEach(connection ->  logger.log(connection.toString(), LogLevel.INFO));
+            resort.nodes().forEach(node -> logger.log(node.toString(), LogLevel.DEBUG));
+        }
+
 
     public enum EngineState {
         NOT_INITIALIZED,
