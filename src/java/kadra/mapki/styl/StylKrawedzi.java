@@ -12,18 +12,11 @@ package kadra.mapki.styl;
  * (<a href="https://docs.oracle.com/en/java/javase/21/language/records.html">dokumentacja</a>),
  * ale dla uproszczenia (nie omawialiśmy rekordów na laboratorium) tworzymy zwykłą klasę.
  */
-public class StylKrawedzi {
-    private final StylLinii stylLinii;
-
-    public StylKrawedzi(StylLinii stylLinii) {
+public record StylKrawedzi(StylLinii stylLinii) {
+    public StylKrawedzi {
         if (stylLinii == null) {
             throw new IllegalArgumentException("Styl linii nie może być nullem.");
         }
-        this.stylLinii = stylLinii;
-    }
-
-    public StylLinii stylLinii() {
-        return stylLinii;
     }
 
     @Override

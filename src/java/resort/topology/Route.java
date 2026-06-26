@@ -1,6 +1,6 @@
 package resort.topology;
 
-public class Route extends Connection {
+public final class Route extends Connection {
     private final int difficulty;
     private final double resilience;
     private final double baseRouteAttractiveness;

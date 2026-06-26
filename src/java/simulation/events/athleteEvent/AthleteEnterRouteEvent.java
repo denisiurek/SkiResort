@@ -17,6 +17,7 @@ public class AthleteEnterRouteEvent extends AthleteEvent implements NonSchedulab
     @Override
     public void execute(Scheduler scheduler) {
         route.registerEntry();
+        athlete.onRouteEntry(route);
         scheduler.runtimeLog(this);
         scheduler.scheduleEvent(new AthleteExitRouteEvent(getTime() + route.getTravelTime(), athlete, route));
     }

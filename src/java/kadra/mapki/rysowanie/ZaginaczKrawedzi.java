@@ -3,11 +3,7 @@ package kadra.mapki.rysowanie;
 import kadra.mapki.graf.Krawedz;
 import kadra.mapki.graf.NieuporzadkowanaParaWezlow;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Wyznacza odpowiednie wielkości zagięć krawędzi.
@@ -22,11 +18,11 @@ public class ZaginaczKrawedzi {
      * węzłami.
      */
     private static final List<List<Integer>> ZAGIECIA = List.of(
-        List.of(0),
-        List.of(13, -13),
-        List.of(28, 0, -28),
-        List.of(40, 13, -13, -40),
-        List.of(65, 28, 0, -28, -65)
+            List.of(0),
+            List.of(13, -13),
+            List.of(28, 0, -28),
+            List.of(40, 13, -13, -40),
+            List.of(65, 28, 0, -28, -65)
     );
     private static final int MAKS_KRAWEDZI_W_GRUPIE = ZAGIECIA.size();
 
@@ -43,7 +39,7 @@ public class ZaginaczKrawedzi {
         }
 
         TreeMap<NieuporzadkowanaParaWezlow, ArrayList<Krawedz>> grupyKrawedzi =
-            grupujPoParachWezlow(krawedzie);
+                grupujPoParachWezlow(krawedzie);
 
         ArrayList<KrawedzZZagieciem> krawedzieZZagieciem = new ArrayList<>();
         for (var grupa : grupyKrawedzi.values()) {
@@ -68,16 +64,16 @@ public class ZaginaczKrawedzi {
     }
 
     private static ArrayList<KrawedzZZagieciem> pozaginajKrawedzieZGrupy(
-        List<Krawedz> grupaKrawedzi
+            List<Krawedz> grupaKrawedzi
     ) {
         if (grupaKrawedzi.size() > MAKS_KRAWEDZI_W_GRUPIE) {
             Krawedz krawedz = grupaKrawedzi.get(0);
             throw new IllegalStateException(String.format(
-                "Dodano %d krawędzi między węzłem %d a węzłem %d, a można co najwyżej %d.",
-                grupaKrawedzi.size(),
-                krawedz.wezelPoczatkowy().numer(),
-                krawedz.wezelKoncowy().numer(),
-                MAKS_KRAWEDZI_W_GRUPIE
+                    "Dodano %d krawędzi między węzłem %d a węzłem %d, a można co najwyżej %d.",
+                    grupaKrawedzi.size(),
+                    krawedz.wezelPoczatkowy().numer(),
+                    krawedz.wezelKoncowy().numer(),
+                    MAKS_KRAWEDZI_W_GRUPIE
             ));
         }
 
@@ -87,7 +83,7 @@ public class ZaginaczKrawedzi {
         // wizualną bliskość w ramach każdej z grup). Sortowanie też po numerze krawędzi
         // zapewnia dodatkowo deterministyczną kolejność wszystkich krawędzi.
         krawedzie.sort(
-            Comparator.comparing(Krawedz::uporzadkowanaParaWezlow).thenComparingInt(Krawedz::numer)
+                Comparator.comparing(Krawedz::uporzadkowanaParaWezlow).thenComparingInt(Krawedz::numer)
         );
 
         ArrayList<Integer> wstepneZagiecia = new ArrayList<>(ZAGIECIA.get(krawedzie.size() - 1));

@@ -30,11 +30,6 @@ public class LiftDepartureEvent extends LiftEvent {
     }
 
     @Override
-    public boolean isFinishable() {
-        return true;
-    }
-
-    @Override
     protected String getEventDescription() {
         return "Lift " + lift.getId() + " departed from " + lift.getSource().getId() + " with " + boardedAthletes.size() + " athletes.";
     }

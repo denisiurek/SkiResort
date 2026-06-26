@@ -15,7 +15,7 @@ public class UporzadkowanaParaWezlow implements Comparable<UporzadkowanaParaWezl
             throw new IllegalArgumentException("Węzły nie mogą być nullem.");
         }
 
-        wezly = new Wezel[]{pierwszy, drugi};
+        wezly = new Wezel[] {pierwszy, drugi};
     }
 
     public Wezel pierwszy() {
@@ -55,15 +55,15 @@ public class UporzadkowanaParaWezlow implements Comparable<UporzadkowanaParaWezl
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(new int[]{wezly[0].numer(), wezly[1].numer()});
+        return Arrays.hashCode(new int[] {wezly[0].numer(), wezly[1].numer()});
     }
 
     @Override
     public String toString() {
         return String.format(
-            "UporzadkowanaParaWezlow{pierwszy=%s, drugi=%s}",
-            pierwszy(),
-            drugi()
+                "UporzadkowanaParaWezlow{pierwszy=%s, drugi=%s}",
+                pierwszy(),
+                drugi()
         );
     }
 }

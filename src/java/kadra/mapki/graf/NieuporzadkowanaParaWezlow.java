@@ -15,8 +15,7 @@ public class NieuporzadkowanaParaWezlow implements Comparable<NieuporzadkowanaPa
 
         if (uporzadkowana.pierwszy().numer() <= uporzadkowana.drugi().numer()) {
             wezly = uporzadkowana;
-        }
-        else {
+        } else {
             wezly = new UporzadkowanaParaWezlow(uporzadkowana.drugi(), uporzadkowana.pierwszy());
         }
     }
@@ -59,9 +58,9 @@ public class NieuporzadkowanaParaWezlow implements Comparable<NieuporzadkowanaPa
     @Override
     public String toString() {
         return String.format(
-            "NieuporzadkowanaParaWezlow{mniejszy=%s, wiekszy=%s}",
-            mniejszy(),
-            wiekszy()
+                "NieuporzadkowanaParaWezlow{mniejszy=%s, wiekszy=%s}",
+                mniejszy(),
+                wiekszy()
         );
     }
 }

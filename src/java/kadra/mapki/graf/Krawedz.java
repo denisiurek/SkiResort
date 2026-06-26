@@ -5,7 +5,9 @@ import kadra.mapki.styl.StylKrawedzi;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Reprezentuje krawędź grafu mapki. */
+/**
+ * Reprezentuje krawędź grafu mapki.
+ */
 public class Krawedz {
     private final int numer;
     private final UporzadkowanaParaWezlow wezly;
@@ -13,14 +15,14 @@ public class Krawedz {
     private final ArrayList<String> linieTekstu;
 
     public Krawedz(
-        int numer,
-        Wezel wezelPoczatkowy,
-        Wezel wezelKoncowy,
-        StylKrawedzi styl,
-        List<String> linieTekstu
+            int numer,
+            Wezel wezelPoczatkowy,
+            Wezel wezelKoncowy,
+            StylKrawedzi styl,
+            List<String> linieTekstu
     ) {
         if (wezelPoczatkowy == null || wezelKoncowy == null || styl == null
-            || linieTekstu == null) {
+                || linieTekstu == null) {
 
             throw new IllegalArgumentException("Argumenty nie mogą być nullem.");
         }
@@ -74,8 +76,8 @@ public class Krawedz {
     @Override
     public String toString() {
         return String.format(
-            "Krawedz{numer=%d, wezelPoczatkowy=%s, wezelKoncowy=%s, styl=%s, linieTekstu=%s}",
-            numer, wezly.pierwszy(), wezly.drugi(), styl, linieTekstu
+                "Krawedz{numer=%d, wezelPoczatkowy=%s, wezelKoncowy=%s, styl=%s, linieTekstu=%s}",
+                numer, wezly.pierwszy(), wezly.drugi(), styl, linieTekstu
         );
     }
 }
