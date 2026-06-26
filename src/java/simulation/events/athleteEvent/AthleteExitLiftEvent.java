@@ -17,7 +17,7 @@ public class AthleteExitLiftEvent extends AthleteEvent implements NonSchedulable
     @Override
     public void execute(Scheduler scheduler) {
         lift.registerExit();
-        scheduler.log(this);
+        scheduler.runtimeLog(this);
         scheduler.executeEvent(new AthleteArriveAtNodeEvent(scheduler.getCurrentTime(), athlete, lift.getDestination()));
     }
 

@@ -16,8 +16,8 @@ public class AthleteEnterLiftQueueEvent extends AthleteEvent implements NonSched
 
     @Override
     public void execute(Scheduler scheduler) {
-        lift.enqueue(athlete);
-        scheduler.log(this);
+        lift.enqueue(athlete, getTime());
+        scheduler.runtimeLog(this);
     }
 
     @Override

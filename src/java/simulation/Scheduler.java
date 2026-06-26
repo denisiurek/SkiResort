@@ -9,7 +9,7 @@ public interface Scheduler {
     void executeEvent(Event event);
     int getCurrentTime();
 
-    void log(Event event);
+    void runtimeLog(Event event);
 
     Random getRandomGenerator();
 }

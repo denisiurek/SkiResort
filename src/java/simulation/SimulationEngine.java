@@ -17,10 +17,10 @@ public class SimulationEngine implements Scheduler {
     private final Random random;
     private final int softStopTime;
     private final int hardStopTime;
-    private EngineState state;
-    private int time;
-    private SkiResort resort;
-    private List<Athlete> athletes;
+    protected EngineState state;
+    protected int time;
+    protected SkiResort resort;
+    protected List<Athlete> athletes;
     private int scheduleCount;
 
     public SimulationEngine(Logger logger, SimulationConfig config) {
@@ -82,8 +82,8 @@ public class SimulationEngine implements Scheduler {
     }
 
     @Override
-    public void log(Event event) {
-        logger.log(event);
+    public void runtimeLog(Event event) {
+        logger.runtimeLog(event);
     }
 
     @Override
@@ -107,9 +107,9 @@ public class SimulationEngine implements Scheduler {
         while (state != EngineState.HARD_STOPPED && (event = eventQueue.poll()) != null) {
             executeEvent(event);
         }
-            logger.log("Summary Report", LogLevel.INFO);
-            resort.connections().forEach(connection ->  logger.log(connection.toString(), LogLevel.INFO));
-            resort.nodes().forEach(node -> logger.log(node.toString(), LogLevel.DEBUG));
+//            logger.runtimeLog("Summary Report", LogLevel.INFO);
+//            resort.connections().forEach(connection ->  logger.runtimeLog(connection.toString(getCurrentTime()), LogLevel.INFO));
+//            resort.nodes().forEach(node -> logger.runtimeLog(node.toString(), LogLevel.DEBUG));
         }
 
 

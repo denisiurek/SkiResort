@@ -33,5 +33,4 @@ public abstract class Connection {
 
     public int getId() {return id;}
 
-    abstract public String toString();
 }

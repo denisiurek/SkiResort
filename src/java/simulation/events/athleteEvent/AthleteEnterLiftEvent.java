@@ -17,7 +17,7 @@ public class AthleteEnterLiftEvent extends AthleteEvent implements NonSchedulabl
     @Override
     public void execute(Scheduler scheduler) {
         lift.registerEntry();
-        scheduler.log(this);
+        scheduler.runtimeLog(this);
     }
 
     @Override

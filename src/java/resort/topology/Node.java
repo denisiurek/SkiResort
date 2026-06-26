@@ -46,7 +46,8 @@ public class Node {
         return "Node " + (communicated ? "s" : "") + id + ", (x, y, height) = (" + x + ", " + y + ", " + height + ")" + ", totalVisits = " + visits;
     }
 
-
+    public int getX() {return x;}
+    public int getY() {return y;}
     public int getId() {return id;}
 
     public void registerVisit() {visits++;}

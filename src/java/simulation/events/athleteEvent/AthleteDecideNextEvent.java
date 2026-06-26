@@ -22,7 +22,7 @@ public class AthleteDecideNextEvent extends AthleteEvent implements NonSchedulab
     public void execute(Scheduler scheduler) {
         Connection chosenConnection = athlete.chooseNextConnection(node);
         this.chosenConnection = chosenConnection;
-        scheduler.log(this);
+        scheduler.runtimeLog(this);
         if (chosenConnection instanceof Lift) {
             scheduler.executeEvent(new AthleteEnterLiftQueueEvent(getTime(), athlete, (Lift) chosenConnection));
         } else scheduler.executeEvent(new AthleteEnterRouteEvent(getTime(), athlete, (Route) chosenConnection));

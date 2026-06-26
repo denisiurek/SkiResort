@@ -19,9 +19,11 @@ public class Route extends Connection {
         return baseRouteAttractiveness + (1 - baseRouteAttractiveness) * Math.pow(resilience, getUses());
     }
 
-    @Override
-    public String toString() {
-        return "Route " + getId() + " from " + getSource().getId() + " to " + getDestination().getId() + ", taken by:" +
-                " " + getUses() + " athletes";
+    public double getResilience() {
+        return resilience;
+    }
+
+    public double getBaseRouteAttractiveness() {
+        return baseRouteAttractiveness;
     }
 }

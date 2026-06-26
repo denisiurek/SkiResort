@@ -16,7 +16,7 @@ public class AthleteExitRouteEvent extends AthleteEvent {
     @Override
     public void execute(Scheduler scheduler) {
         route.registerExit();
-        scheduler.log(this);
+        scheduler.runtimeLog(this);
         scheduler.executeEvent(new AthleteArriveAtNodeEvent(scheduler.getCurrentTime(), athlete, route.getDestination()));
     }
 

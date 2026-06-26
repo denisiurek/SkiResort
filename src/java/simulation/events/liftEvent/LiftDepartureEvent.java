@@ -18,12 +18,12 @@ public class LiftDepartureEvent extends LiftEvent {
     @Override
     public void execute(Scheduler scheduler) {
 
-        boardedAthletes = lift.takePassengers();
+        boardedAthletes = lift.takePassengers(getTime());
 
         for (Athlete athlete : boardedAthletes) {
             scheduler.executeEvent(new AthleteEnterLiftEvent(getTime(), athlete, lift));
         }
-        scheduler.log(this);
+        scheduler.runtimeLog(this);
         scheduler.scheduleEvent(new LiftArrivalEvent(getTime() + lift.getTravelTime(), lift, boardedAthletes));
         scheduler.scheduleEvent(new LiftDepartureEvent(getTime() + lift.getDepartureSpread(), lift));
 
