@@ -17,10 +17,10 @@ public class SimulationEngine implements Scheduler {
     private final Random random;
     private final int softStopTime;
     private final int hardStopTime;
-    protected EngineState state;
-    protected int time;
-    protected SkiResort resort;
-    protected List<Athlete> athletes;
+    private EngineState state;
+    private int time;
+    private SkiResort resort;
+    private List<Athlete> athletes;
     private int scheduleCount;
 
     public SimulationEngine(Logger logger, SimulationConfig config) {
@@ -40,6 +40,18 @@ public class SimulationEngine implements Scheduler {
 
     public void setAthletes(List<Athlete> athletes) {
         this.athletes = athletes;
+    }
+
+    public EngineState getState() {
+        return state;
+    }
+
+    public SkiResort getResort() {
+        return resort;
+    }
+
+    public List<Athlete> getAthletes() {
+        return athletes;
     }
 
     public void executeEvent(Event event) {
@@ -86,7 +98,6 @@ public class SimulationEngine implements Scheduler {
         logger.runtimeLog(event);
     }
 
-    @Override
     public Random getRandomGenerator() {
         return random;
     }
@@ -107,14 +118,10 @@ public class SimulationEngine implements Scheduler {
         while (state != EngineState.HARD_STOPPED && (event = eventQueue.poll()) != null) {
             executeEvent(event);
         }
-//            logger.runtimeLog("Summary Report", LogLevel.INFO);
-//            resort.connections().forEach(connection ->  logger.runtimeLog(connection.toString(getCurrentTime()), LogLevel.INFO));
-//            resort.nodes().forEach(node -> logger.runtimeLog(node.toString(), LogLevel.DEBUG));
-        }
+    }
 
 
     public enum EngineState {
-        NOT_INITIALIZED,
         READY,
         RUNNING,
         SOFT_STOPPED,

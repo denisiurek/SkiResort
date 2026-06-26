@@ -1,11 +1,13 @@
 package simulation.events.athleteEvent;
 
 import resort.athletes.Athlete;
+import resort.topology.Connection;
 import resort.topology.Route;
 import simulation.LogLevel;
 import simulation.Scheduler;
+import simulation.events.TravelEvent;
 
-public class AthleteExitRouteEvent extends AthleteEvent {
+public class AthleteExitRouteEvent extends AthleteEvent implements TravelEvent {
     private final Route route;
 
     public AthleteExitRouteEvent(int time, Athlete athlete, Route route) {
@@ -28,5 +30,9 @@ public class AthleteExitRouteEvent extends AthleteEvent {
     @Override
     protected String getEventDescription() {
         return "Athlete " + athlete.getId() + " exited route " + route.getId() + " at node " + route.getDestination().getId();
+    }
+    @Override
+    public Connection getConnection() {
+        return this.route;
     }
 }

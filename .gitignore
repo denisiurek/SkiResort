@@ -30,6 +30,6 @@ build/
 ### VS Code ###
 .vscode/
 
-### Mac OS ###
-.DS_Store!/data/przykladowe-dane-1.txt
-/MODERNIZATION-PLAN.md
+/data/
+/maps/
+/maps-*/

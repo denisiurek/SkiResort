@@ -1,10 +1,7 @@
 package simulation.events.athleteEvent;
 
 import resort.athletes.Athlete;
-import resort.topology.Connection;
-import resort.topology.Lift;
-import resort.topology.Node;
-import resort.topology.Route;
+import resort.topology.*;
 import simulation.LogLevel;
 import simulation.Scheduler;
 import simulation.events.NonSchedulableEvent;
@@ -21,11 +18,15 @@ public class AthleteDecideNextEvent extends AthleteEvent implements NonSchedulab
     @Override
     public void execute(Scheduler scheduler) {
         Connection chosenConnection = athlete.chooseNextConnection(node);
+        if (chosenConnection == null) {
+            throw new IllegalStateException("Athlete " + athlete.getId() + " has no available connection at node " + node.getId());
+        }
         this.chosenConnection = chosenConnection;
         scheduler.runtimeLog(this);
-        if (chosenConnection instanceof Lift) {
-            scheduler.executeEvent(new AthleteEnterLiftQueueEvent(getTime(), athlete, (Lift) chosenConnection));
-        } else scheduler.executeEvent(new AthleteEnterRouteEvent(getTime(), athlete, (Route) chosenConnection));
+        switch (chosenConnection) {
+            case Lift lift -> scheduler.executeEvent(new AthleteEnterLiftQueueEvent(getTime(), athlete, lift));
+            case Route route -> scheduler.executeEvent(new AthleteEnterRouteEvent(getTime(), athlete, route));
+        }
     }
 
     @Override

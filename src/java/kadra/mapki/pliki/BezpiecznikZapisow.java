@@ -22,11 +22,13 @@ public class BezpiecznikZapisow {
     private static final long LIMIT_ZNAKOW = 1_000_000_000L;
 
     private static final String SUFIKS_KOMUNIKATU = (
-        "To bardzo dużo. Bardzo możliwe, że symulacja wpadła w pętlę nieskończoną. Przerywam " +
-            "działanie programu, żeby zapobiec zajęciu całego miejsca na dysku."
+            "To bardzo dużo. Bardzo możliwe, że symulacja wpadła w pętlę nieskończoną. Przerywam " +
+                    "działanie programu, żeby zapobiec zajęciu całego miejsca na dysku."
     );
 
-    /** Liczba katalogów/plików/znaków zapisanych do tej pory na dysku. */
+    /**
+     * Liczba katalogów/plików/znaków zapisanych do tej pory na dysku.
+     */
     private long ileKatalogow;
     private long ilePlikow;
     private long ileZnakow;
@@ -41,9 +43,9 @@ public class BezpiecznikZapisow {
         ileKatalogow++;
         if (ileKatalogow > LIMIT_KATALOGOW) {
             throw new WyjatekPodejrzanieDuzoZapisow(String.format(
-                "Utworzenie kolejnego katalogu przekroczy limit liczby katalogów (%d). %s",
-                LIMIT_KATALOGOW,
-                SUFIKS_KOMUNIKATU
+                    "Utworzenie kolejnego katalogu przekroczy limit liczby katalogów (%d). %s",
+                    LIMIT_KATALOGOW,
+                    SUFIKS_KOMUNIKATU
             ));
         }
     }
@@ -52,18 +54,18 @@ public class BezpiecznikZapisow {
         ilePlikow++;
         if (ilePlikow > LIMIT_PLIKOW) {
             throw new WyjatekPodejrzanieDuzoZapisow(String.format(
-                "Utworzenie kolejnego pliku przekroczy limit liczby plików (%d). %s",
-                LIMIT_PLIKOW,
-                SUFIKS_KOMUNIKATU
+                    "Utworzenie kolejnego pliku przekroczy limit liczby plików (%d). %s",
+                    LIMIT_PLIKOW,
+                    SUFIKS_KOMUNIKATU
             ));
         }
 
         ileZnakow += ileZnakowPliku;
         if (ileZnakow > LIMIT_ZNAKOW) {
             throw new WyjatekPodejrzanieDuzoZapisow(String.format(
-                "Utworzenie kolejnego pliku przekroczy limit liczby znaków (%d). %s",
-                LIMIT_ZNAKOW,
-                SUFIKS_KOMUNIKATU
+                    "Utworzenie kolejnego pliku przekroczy limit liczby znaków (%d). %s",
+                    LIMIT_ZNAKOW,
+                    SUFIKS_KOMUNIKATU
             ));
         }
     }

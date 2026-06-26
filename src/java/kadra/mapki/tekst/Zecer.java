@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** Układa tekst na krawędzi. */
+/**
+ * Układa tekst na krawędzi.
+ */
 public class Zecer {
     private static final String SYGNAL_PRZYCIECIA = "...";
 
@@ -16,7 +18,7 @@ public class Zecer {
     /**
      * Tworzy instancję Zecera.
      *
-     * @param maksLiczbaLinii maksymalna liczba linii, która mieści się na krawędzi.
+     * @param maksLiczbaLinii    maksymalna liczba linii, która mieści się na krawędzi.
      * @param limitDlugosciLinii maksymalna liczba znaków, którą Zecer może umieścić w jednej
      *                           linii tekstu. Jeśli tekst w linii jest za długi, Zecer docina go do
      *                           limitu i dopisuje wielokropek (przycięta linia z wielokropkiem
@@ -67,7 +69,7 @@ public class Zecer {
         String ciagZnakowSlownych = "[%s]+".formatted(znakiSlowne);
         String znakNieslowny = "[^%s]".formatted(znakiSlowne);
         Pattern wzorzec = Pattern.compile(
-            "(%s|%s)".formatted(ciagZnakowSlownych, znakNieslowny)
+                "(%s|%s)".formatted(ciagZnakowSlownych, znakNieslowny)
         );
         Matcher dopasowania = wzorzec.matcher(tekst);
 
@@ -81,9 +83,9 @@ public class Zecer {
 
         if (sumaDlugosci != tekst.length()) {
             throw new RuntimeException(String.format(
-                "Błąd podziału na leksemy tekstu \"%s\". Otrzymano podział %s.",
-                tekst,
-                leksemy
+                    "Błąd podziału na leksemy tekstu \"%s\". Otrzymano podział %s.",
+                    tekst,
+                    leksemy
             ));
         }
         return leksemy;
@@ -95,16 +97,14 @@ public class Zecer {
         for (String leksem : leksemy) {
             if (obecnaLinia.length() + leksem.length() <= limitDlugosciLinii) {
                 obecnaLinia.append(leksem);
-            }
-            else {
+            } else {
                 if (obecnaLinia.isEmpty()) {
                     // Jeśli leksem nie mieści się nawet w pustej linii, to po prostu trzeba
                     // go wpisać - przeniesienie do nowej linii nic by nie dało.
                     obecnaLinia.append(leksem);
                     linie.add(obecnaLinia.toString());
                     obecnaLinia = new StringBuilder();
-                }
-                else {
+                } else {
                     linie.add(obecnaLinia.toString());
                     obecnaLinia = new StringBuilder(leksem);
                 }
@@ -129,9 +129,9 @@ public class Zecer {
     public List<String> przytnijLinie(List<String> linie) {
         if (linie.size() > maksLiczbaLinii) {
             throw new IllegalArgumentException(
-                "Podano %d linii, a można co najwyżej %d.".formatted(
-                    linie.size(), maksLiczbaLinii
-                )
+                    "Podano %d linii, a można co najwyżej %d.".formatted(
+                            linie.size(), maksLiczbaLinii
+                    )
             );
         }
         ArrayList<String> przycieteLinie = new ArrayList<>();

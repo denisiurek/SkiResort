@@ -2,7 +2,9 @@ package kadra.mapki.graf;
 
 import kadra.mapki.styl.StylWezla;
 
-/** Reprezentuje węzeł grafu mapki. */
+/**
+ * Reprezentuje węzeł grafu mapki.
+ */
 public class Wezel {
     private final int numer;
     private final Punkt punkt;
@@ -46,8 +48,8 @@ public class Wezel {
     @Override
     public String toString() {
         return String.format(
-            "Wezel{numer=%d, punkt=%s, styl=%s}",
-            numer, punkt, styl
+                "Wezel{numer=%d, punkt=%s, styl=%s}",
+                numer, punkt, styl
         );
     }
 }

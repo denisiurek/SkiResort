@@ -12,19 +12,12 @@ package kadra.mapki.styl;
  * (<a href="https://docs.oracle.com/en/java/javase/21/language/records.html">dokumentacja</a>),
  * ale dla uproszczenia (nie omawialiśmy rekordów na laboratorium) tworzymy zwykłą klasę.
  */
-public class StylWezla {
-    private final GruboscKonturu gruboscKonturu;
-
-    public StylWezla(GruboscKonturu gruboscKonturu) {
+public record StylWezla(GruboscKonturu gruboscKonturu) {
+    public StylWezla {
         if (gruboscKonturu == null) {
             throw new IllegalArgumentException("Grubość konturu nie może być nullem.");
         }
 
-        this.gruboscKonturu = gruboscKonturu;
-    }
-
-    public GruboscKonturu gruboscKonturu() {
-        return gruboscKonturu;
     }
 
     @Override

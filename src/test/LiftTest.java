@@ -14,7 +14,7 @@ class LiftTest {
     }
 
     private static Athlete dummyAthlete(int id) {
-        return new Athlete(id, 5, 0.0, 0.5, 0.5, false, (a, n) -> null);
+        return new Athlete(id, 5, 0.0, 0.5, 0.5, 0.0, 0.0, 0, false, (a, n) -> null);
     }
 
     private static Lift createLift(int capacity) {

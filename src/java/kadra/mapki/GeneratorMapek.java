@@ -1,16 +1,16 @@
 package kadra.mapki;
 
-import kadra.mapki.pliki.WyjatekSystemuPlikow;
-import kadra.mapki.pliki.OperatorSystemuPlikow;
 import kadra.mapki.graf.Krawedz;
 import kadra.mapki.graf.Wezel;
+import kadra.mapki.pliki.OperatorSystemuPlikow;
+import kadra.mapki.pliki.WyjatekSystemuPlikow;
 import kadra.mapki.rysowanie.GeneratorKoduLatex;
 import kadra.mapki.rysowanie.KrawedzZZagieciem;
 import kadra.mapki.rysowanie.ZaginaczKrawedzi;
 import kadra.mapki.styl.StylKrawedzi;
 import kadra.mapki.styl.StylWezla;
-import kadra.mapki.tekst.Zecer;
 import kadra.mapki.tekst.InspektorZnakow;
+import kadra.mapki.tekst.Zecer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -58,8 +58,8 @@ public class GeneratorMapek {
      *                        o podobnej nazwie (z liczbowym sufiksem) i to do niego będzie
      *                        zapisywał mapki.
      * @throws WyjatekSystemuPlikow jeśli nie udało się utworzyć katalogu o zadanej ścieżce (ew. z
-     * liczbowym sufiksem) – np. jeśli użytkownik nie ma uprawnień do utworzenia katalogu w zadanej
-     * lokalizacji.
+     *                              liczbowym sufiksem) – np. jeśli użytkownik nie ma uprawnień do utworzenia katalogu w zadanej
+     *                              lokalizacji.
      */
     public GeneratorMapek(String sciezkaKatalogu) throws WyjatekSystemuPlikow {
         inspektorZnakow = new InspektorZnakow();
@@ -94,9 +94,8 @@ public class GeneratorMapek {
      * @param x     współrzędna x położenia węzła na mapce. Wymaganie: x >= 0.
      * @param y     współrzędna y położenia węzła na mapce. Wymaganie: y >= 0.
      * @param styl  graficzny styl węzła na mapce. Nie może być nullem.
-     *
      * @throws IllegalArgumentException jeśli wezeł o zadanym numerze już istnieje lub inne
-     * parametry nie spełniają warunków opisanych wyżej.
+     *                                  parametry nie spełniają warunków opisanych wyżej.
      */
     public void dodajWezel(int numer, int x, int y, StylWezla styl) {
         if (x < 0 || y < 0) {
@@ -138,24 +137,24 @@ public class GeneratorMapek {
      * @throws IllegalArgumentException jeśli któryś z parametrów nie spełnia wymagań.
      */
     public void dodajKrawedz(
-        int numerPoczatkowegoWezla,
-        int numerKoncowegoWezla,
-        StylKrawedzi styl,
-        List<String> linie
+            int numerPoczatkowegoWezla,
+            int numerKoncowegoWezla,
+            StylKrawedzi styl,
+            List<String> linie
     ) {
         ArrayList<Wezel> konce = sprawdzWspolneParametryKrawedzi(
-            numerPoczatkowegoWezla,
-            numerKoncowegoWezla,
-            styl
+                numerPoczatkowegoWezla,
+                numerKoncowegoWezla,
+                styl
         );
         if (linie == null) {
             throw new IllegalArgumentException("Lista linii nie może być nullem.");
         }
         if (linie.size() > MAKSYMALNA_LICZBA_LINII) {
             throw new IllegalArgumentException(String.format(
-                "Podano %d linii, a można co najwyżej %d.",
-                linie.size(),
-                MAKSYMALNA_LICZBA_LINII
+                    "Podano %d linii, a można co najwyżej %d.",
+                    linie.size(),
+                    MAKSYMALNA_LICZBA_LINII
             ));
         }
         for (String linia : linie) {
@@ -179,15 +178,15 @@ public class GeneratorMapek {
      * zawierać znaku nowej linii (zestaw dozwolonych znaków jest identyczny jak w liście linii).
      */
     public void dodajKrawedz(
-        int numerPoczatkowegoWezla,
-        int numerKoncowegoWezla,
-        StylKrawedzi styl,
-        String tekst
+            int numerPoczatkowegoWezla,
+            int numerKoncowegoWezla,
+            StylKrawedzi styl,
+            String tekst
     ) {
         ArrayList<Wezel> konce = sprawdzWspolneParametryKrawedzi(
-            numerPoczatkowegoWezla,
-            numerKoncowegoWezla,
-            styl
+                numerPoczatkowegoWezla,
+                numerKoncowegoWezla,
+                styl
         );
         if (tekst == null) {
             throw new IllegalArgumentException("Tekst krawędzi nie może być nullem.");
@@ -204,8 +203,8 @@ public class GeneratorMapek {
      *
      * @param nazwaPliku nazwa pliku mapki, który generator ma utworzyć (w katalogu, który generator
      *                   utworzył w konstruktorze).
-     * @throws WyjatekSystemuPlikow jeśli plik o tej nazwie już istnieje lub wystąpił inny błąd
-     * związany z systemem plików.
+     * @throws WyjatekSystemuPlikow     jeśli plik o tej nazwie już istnieje lub wystąpił inny błąd
+     *                                  związany z systemem plików.
      * @throws IllegalArgumentException jeśli podana nazwaPliku jest nullem.
      */
     public void tworzMapke(String nazwaPliku) throws WyjatekSystemuPlikow {
@@ -214,10 +213,10 @@ public class GeneratorMapek {
         }
 
         ArrayList<KrawedzZZagieciem> krawedzieZZagieciem =
-            ZaginaczKrawedzi.pozaginajKrawedzie(krawedzie);
+                ZaginaczKrawedzi.pozaginajKrawedzie(krawedzie);
 
         String opisMapki = generatorKoduLatex.generujKodLatexMapki(
-            wezly.values(), krawedzieZZagieciem
+                wezly.values(), krawedzieZZagieciem
         );
 
         operatorSystemuPlikow.zapiszDoPliku(nazwaPliku, opisMapki);
@@ -226,13 +225,13 @@ public class GeneratorMapek {
     /* =============== Niżej są już tylko metody prywatne. =============== */
 
     private ArrayList<Wezel> sprawdzWspolneParametryKrawedzi(
-        int numerPoczatkowegoWezla,
-        int numerKoncowegoWezla,
-        StylKrawedzi styl
+            int numerPoczatkowegoWezla,
+            int numerKoncowegoWezla,
+            StylKrawedzi styl
     ) {
         if (numerPoczatkowegoWezla == numerKoncowegoWezla) {
             throw new IllegalArgumentException(
-                "Początek krawędzi musi być w innym węźle niż koniec."
+                    "Początek krawędzi musi być w innym węźle niż koniec."
             );
         }
         if (styl == null) {
@@ -244,12 +243,12 @@ public class GeneratorMapek {
         double dlugosc = konce.get(0).punkt().odleglosc(konce.get(1).punkt());
         if (dlugosc < MINIMALNA_ZALECANA_DLUGOSC_KRAWEDZI) {
             System.err.printf(
-                "Uwaga: Krawędź między od węzła %d do węzła %d jest krótsza niż zalecane %.2f " +
-                "(ma długość %.2f). Dłuższy tekst może nie wyświetlać się poprawnie.%n",
-                konce.get(0).numer(),
-                konce.get(1).numer(),
-                MINIMALNA_ZALECANA_DLUGOSC_KRAWEDZI,
-                dlugosc
+                    "Uwaga: Krawędź między od węzła %d do węzła %d jest krótsza niż zalecane %.2f " +
+                            "(ma długość %.2f). Dłuższy tekst może nie wyświetlać się poprawnie.%n",
+                    konce.get(0).numer(),
+                    konce.get(1).numer(),
+                    MINIMALNA_ZALECANA_DLUGOSC_KRAWEDZI,
+                    dlugosc
             );
         }
 
@@ -262,7 +261,7 @@ public class GeneratorMapek {
             Wezel wezel = wezly.get(numer);
             if (wezel == null) {
                 throw new IllegalArgumentException(
-                    "Węzeł o numerze %d nie istnieje.".formatted(numer)
+                        "Węzeł o numerze %d nie istnieje.".formatted(numer)
                 );
             }
             szukaneWezly.add(wezel);
@@ -279,10 +278,10 @@ public class GeneratorMapek {
     }
 
     private void dodajKrawedzZPrzygotowanymTekstem(
-        Wezel wezelPoczatkowy,
-        Wezel wezelKoncowy,
-        StylKrawedzi styl,
-        List<String> linie
+            Wezel wezelPoczatkowy,
+            Wezel wezelKoncowy,
+            StylKrawedzi styl,
+            List<String> linie
     ) {
         Krawedz krawedz = new Krawedz(krawedzie.size(), wezelPoczatkowy, wezelKoncowy, styl, linie);
         krawedzie.add(krawedz);

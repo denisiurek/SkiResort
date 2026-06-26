@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/** Wykonuje operacje na systemie plików. */
+/**
+ * Wykonuje operacje na systemie plików.
+ */
 public class OperatorSystemuPlikow {
     /**
      * Jeśli podany w konstruktorze katalog już istnieje, operator systemu plików spróbuje znaleźć
@@ -21,7 +23,9 @@ public class OperatorSystemuPlikow {
      */
     private static final BezpiecznikZapisow bezpiecznik = new BezpiecznikZapisow();
 
-    /** Katalog w którym zapisywane są wszystkie pliki. */
+    /**
+     * Katalog w którym zapisywane są wszystkie pliki.
+     */
     private final File katalog;
 
     /**
@@ -34,7 +38,7 @@ public class OperatorSystemuPlikow {
      *                          istnieje, operator postara się utworzyć katalog o podobnej nazwie,
      *                          ale z dodanym numerycznym sufiksem.
      * @throws WyjatekSystemuPlikow jeśli nie udało się znaleźć niezajętej jeszcze ścieżki lub
-     * utworzenie katalogu z jakiegoś powodu się nie powiodło.
+     *                              utworzenie katalogu z jakiegoś powodu się nie powiodło.
      */
     public OperatorSystemuPlikow(String sciezkaDoKatalogu) throws WyjatekSystemuPlikow {
         if (sciezkaDoKatalogu == null) {
@@ -45,9 +49,9 @@ public class OperatorSystemuPlikow {
         if (kandydatNaKatalog.exists()) {
             kandydatNaKatalog = znajdzKatalogZastepczy(kandydatNaKatalog);
             System.err.printf(
-                "Ścieżka \"%s\" jest już zajęta. Tworzę katalog o zastępczej ścieżce \"%s\".\n",
-                sciezkaDoKatalogu,
-                kandydatNaKatalog
+                    "Ścieżka \"%s\" jest już zajęta. Tworzę katalog o zastępczej ścieżce \"%s\".\n",
+                    sciezkaDoKatalogu,
+                    kandydatNaKatalog
             );
         }
 
@@ -56,17 +60,16 @@ public class OperatorSystemuPlikow {
         try {
             if (!katalog.mkdirs()) {
                 throw new WyjatekSystemuPlikow(
-                    "Nie udało się utworzyć katalogu o ścieżce \"%s\".".formatted(katalog)
+                        "Nie udało się utworzyć katalogu o ścieżce \"%s\".".formatted(katalog)
                 );
             }
-        }
-        catch (SecurityException wyjatek) {
+        } catch (SecurityException wyjatek) {
             throw new WyjatekSystemuPlikow(
-                zlozKomunikatSecurityException(String.format(
-                    "utworzenie katalogu o ścieżce \"%s\"",
-                    katalog
-                )),
-                wyjatek
+                    zlozKomunikatSecurityException(String.format(
+                            "utworzenie katalogu o ścieżce \"%s\"",
+                            katalog
+                    )),
+                    wyjatek
             );
         }
     }
@@ -85,22 +88,21 @@ public class OperatorSystemuPlikow {
 
             if (katalogZastepczy.exists()) {
                 throw new WyjatekSystemuPlikow(String.format(
-                    "Przekroczono limit %d prób znalezienia unikalnego sufiksu dla " +
-                        "katalogu o nazwie \"%s\" w katalogu \"%s\".",
-                    MAKS_PROB_KATALOGU,
-                    nazwaKatalogu,
-                    rodzic
+                        "Przekroczono limit %d prób znalezienia unikalnego sufiksu dla " +
+                                "katalogu o nazwie \"%s\" w katalogu \"%s\".",
+                        MAKS_PROB_KATALOGU,
+                        nazwaKatalogu,
+                        rodzic
                 ));
             }
             return katalogZastepczy;
-        }
-        catch (SecurityException wyjatek) {
+        } catch (SecurityException wyjatek) {
             throw new WyjatekSystemuPlikow(
-                zlozKomunikatSecurityException(String.format(
-                    "sprawdzenie, czy katalog o ścieżce \"%s\" istnieje",
-                    katalogZastepczy
-                )),
-                wyjatek
+                    zlozKomunikatSecurityException(String.format(
+                            "sprawdzenie, czy katalog o ścieżce \"%s\" istnieje",
+                            katalogZastepczy
+                    )),
+                    wyjatek
             );
         }
     }
@@ -118,9 +120,9 @@ public class OperatorSystemuPlikow {
      */
     private static String zlozKomunikatSecurityException(String zablokowanaAkcja) {
         return String.format(
-            "Klasa SecurityManager zablokowała %s. To dziwne, bo SecurityManager od Javy 17 jest " +
-                "uznawany za przestarzały i nowy kod nie powinien z niego korzystać.",
-            zablokowanaAkcja
+                "Klasa SecurityManager zablokowała %s. To dziwne, bo SecurityManager od Javy 17 jest " +
+                        "uznawany za przestarzały i nowy kod nie powinien z niego korzystać.",
+                zablokowanaAkcja
         );
     }
 
@@ -129,9 +131,9 @@ public class OperatorSystemuPlikow {
      * tej klasy).
      *
      * @param nazwaPliku nazwa pliku (bez prefiksu z katalogów).
-     * @param tekst tekst do zapisania.
+     * @param tekst      tekst do zapisania.
      * @throws WyjatekSystemuPlikow jeśli plik o zadanej nazwie w katalogu tego
-     * OperatoraSystemuPlikow już istnieje lub wystąpił inny problem z systemem plików.
+     *                              OperatoraSystemuPlikow już istnieje lub wystąpił inny problem z systemem plików.
      */
     public void zapiszDoPliku(String nazwaPliku, String tekst) throws WyjatekSystemuPlikow {
         if (nazwaPliku == null) {
@@ -147,11 +149,10 @@ public class OperatorSystemuPlikow {
         bezpiecznik.odnotujNowyPlik(tekst.length());
         try (FileWriter pisarz = new FileWriter(plik)) {
             pisarz.write(tekst);
-        }
-        catch (IOException wyjatek) {
+        } catch (IOException wyjatek) {
             throw new WyjatekSystemuPlikow(
-                "Nie udało się zapisać tekstu do pliku \"%s\".".formatted(plik),
-                wyjatek
+                    "Nie udało się zapisać tekstu do pliku \"%s\".".formatted(plik),
+                    wyjatek
             );
         }
     }
@@ -160,17 +161,16 @@ public class OperatorSystemuPlikow {
         try {
             if (plik.exists()) {
                 throw new WyjatekSystemuPlikow(
-                    "Plik o ścieżce \"%s\" już istnieje.".formatted(plik)
+                        "Plik o ścieżce \"%s\" już istnieje.".formatted(plik)
                 );
             }
-        }
-        catch (SecurityException wyjatek) {
+        } catch (SecurityException wyjatek) {
             throw new WyjatekSystemuPlikow(
-                zlozKomunikatSecurityException(String.format(
-                    "sprawdzenie, czy plik o ścieżce \"%s\" już istnieje",
-                    plik
-                )),
-                wyjatek
+                    zlozKomunikatSecurityException(String.format(
+                            "sprawdzenie, czy plik o ścieżce \"%s\" już istnieje",
+                            plik
+                    )),
+                    wyjatek
             );
         }
     }
